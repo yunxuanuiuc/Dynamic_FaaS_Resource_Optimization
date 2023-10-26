@@ -2,11 +2,13 @@ import argparse
 import json
 import requests
 import time
+from datetime import datetime
 
 # CONFIG VARIABLES
 config = {
     'debug': False,
-    'wait_period': 100 / 1000, # number of milliseconds divide by 1000
+    'duration': 5,             # number of seconds for the run
+    'wait_period': 100 / 1000, # in seconds, for the number of milliseconds divide by 1000 (ms/s)
     'workload_requests_params': {
         'low': {
             'payload': { },
@@ -22,13 +24,19 @@ config = {
 
 class GenLoad(object):
 
-    def __init__(self, debug=False, workload_requests_params=None, wait_period=0, workload=None, dryrun=False):
-        # nothing
+    def __init__(self,
+                 debug=False,
+                 workload_requests_params=None,
+                 wait_period=0,
+                 workload=None,
+                 dryrun=False,
+                 duration=0):
         self.debug = debug
         self.workload_requests_params = workload_requests_params
         self.workload = workload
         self.dryrun = dryrun
         self.wait_period = wait_period
+        self.duration = duration
 
     def send_request(self, api, payload):
         if not self.dryrun:
@@ -57,10 +65,11 @@ class GenLoad(object):
             case 'hih': self.send_high_workload_request()
 
     def run(self):
-        print(f'Starting to run...')
+        start_time = datetime.utcnow()
+        print(f'Starting to run - start time: {start_time}...')
 
         # Will need to kill the process or send it the kill signal
-        while(True):
+        while (datetime.utcnow() - start_time).total_seconds() < self.duration:
             try:
 
                 match self.workload:
@@ -106,6 +115,7 @@ if __name__ == '__main__':
         workload_requests_params=config['workload_requests_params'],
         workload=workload,
         dryrun=dryrun,
+        duration=config['duration']
     )
 
     match args.action:
