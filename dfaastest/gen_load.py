@@ -6,13 +6,13 @@ from datetime import datetime
 
 # CONFIG VARIABLES
 config = {
-    'debug': False,
+    'debug': True,
     'duration': 5,             # number of seconds for the run
     'wait_period': 100 / 1000, # in seconds, for the number of milliseconds divide by 1000 (ms/s)
     'workload_requests_params': {
-        'low': {
+        'decompress': {
             'payload': { },
-            'api': 'TBD',
+            'api': 'https://t09vg0yvc0.execute-api.us-east-1.amazonaws.com/test/mcs598-dfaastest-decompress',
         },
         'high': {
             'payload': { },
@@ -97,7 +97,12 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Run the lambda function load generator.')
     parser.add_argument('--action', default="run", choices=['run', 'test'], help='Run system continuously or test a single function')
     parser.add_argument('--dryrun', action='store_true', help='Whether or not to send/use-real requests.')
-    parser.add_argument('--workload', required=True, choices=['low', 'high'], help='Which function to run.')
+    parser.add_argument('--workload',
+                        required=True,
+                        choices=[
+                            'decompress',
+                            'high'],
+                        help='Which function to run.')
 
     args = parser.parse_args()
     print(f'args: {args}')
