@@ -1,0 +1,18 @@
+load_generator:
+  debug: True
+  duration: 5                # number of seconds for the run
+  wait_period: 0.1           # in seconds, for the number of milliseconds divide by 1000 (ms/s)
+
+funk_generator:
+  decompress:
+    filename: 'dfaastest/synthetic_functions/decompress.py'
+    zipfilename: 'dfaastest/synthetic_functions/decompress.zip'
+    handler_name: 'dfaastest.synthetic_functions.decompress.lambda_handler'
+    role_name: 'LogProcessorRole'
+    function_name: 'dfaastest_decompress'
+    description: 'Compress text into a file and decompress'
+    runtime: 'python3.9'
+    api_name: 'dfaastest-decompress-rest-api'
+    api_base_path: 'mcs598-dfaastest-decompress'
+    api_stage: 'test'
+    params: []

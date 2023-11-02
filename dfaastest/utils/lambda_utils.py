@@ -24,7 +24,7 @@ def create(lambda_config):
     lambda_runtime = lambda_config['runtime']
     api_name = lambda_config['api_name']
     api_base_path = lambda_config['api_base_path']
-    api_stage = 'test'
+    api_stage = lambda_config['api_stage']
 
     iam_resource = boto3.resource('iam')
     lambda_client = boto3.client('lambda')
@@ -56,16 +56,28 @@ def create(lambda_config):
         wrapper.update_function_configuration(lambda_function_name, lambda_handler_name)
         wrapper.wait_for_update(lambda_function_name)
 
-    print(f"Creating Amazon API Gateway REST API {api_name}...")
-    account_id = boto3.client('sts').get_caller_identity()['Account']
-    api_id = create_rest_api(
-        apig_client, api_name, api_base_path, api_stage, account_id,
-        lambda_client, lambda_function_arn)
+    existing_rest_api = get_rest_api(api_name)
+    print(f"existing_rest_api: {existing_rest_api}")
+
+    if not existing_rest_api:
+        print(f"Creating Amazon API Gateway REST API {api_name}...")
+        account_id = boto3.client('sts').get_caller_identity()['Account']
+        api_id = create_rest_api(
+            apig_client, api_name, api_base_path, api_stage, account_id,
+            lambda_client, lambda_function_arn)
+    else:
+        api_id = existing_rest_api['id']
+
     api_url = construct_api_url(
         api_id, apig_client.meta.region_name, api_stage, api_base_path)
-    print(f"REST API created, URL is :\n\t{api_url}")
+    print(f"REST API URL is:\n\t{api_url}")
     print(f"Sleeping for a couple seconds to give AWS time to prepare...")
     time.sleep(2)
+
+
+def get_region_name():
+    apig_client = boto3.client('apigateway')
+    return apig_client.meta.region_name
 
 
 def create_rest_api(
@@ -170,6 +182,21 @@ def create_rest_api(
         raise
 
     return api_id
+
+
+def get_rest_api(rest_api_name):
+    apig_client = boto3.client('apigateway')
+
+    rest_apis = apig_client.get_rest_apis()['items']
+
+    for api in rest_apis :
+        #print(f"api['name']: {api['name']}")
+
+        if api['name'] == rest_api_name:
+            return api
+
+    return None
+
 
 
 def construct_api_url(api_id, region, api_stage, api_base_path):
@@ -455,17 +482,4 @@ class LambdaWrapper:
 
 
 if __name__ == '__main__':
-
-    lambda_config = {
-        'filename': 'dfaastest/synthetic_functions/decompress.py',
-        'zipfilename': 'dfaastest/synthetic_functions/decompress.zip',
-        'handler_name': 'dfaastest.synthetic_functions.decompress.lambda_handler',
-        'role_name': 'LogProcessorRole',
-        'function_name': 'dfaastest_decompress',
-        'api_name': 'dfaastest-decompress-rest-api',
-        'description': 'Compress text into a file and decompress',
-        'runtime': 'python3.9',
-        'api_base_path': 'mcs598-dfaastest-decompress',
-    }
-
-    create(lambda_config)
+    get_rest_api("dfaastest-decompress-rest-api")

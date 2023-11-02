@@ -4,39 +4,31 @@ import requests
 import time
 from datetime import datetime
 
-# CONFIG VARIABLES
-config = {
-    'debug': True,
-    'duration': 5,             # number of seconds for the run
-    'wait_period': 100 / 1000, # in seconds, for the number of milliseconds divide by 1000 (ms/s)
-    'workload_requests_params': {
-        'decompress': {
-            'payload': { },
-            'api': 'https://t09vg0yvc0.execute-api.us-east-1.amazonaws.com/test/mcs598-dfaastest-decompress',
-        },
-        'high': {
-            'payload': { },
-            'api': 'TBD',
-        },
-    }
-}
+from utils.lambda_utils import get_rest_api, construct_api_url, get_region_name
+from utils.config_utils import get_funk_names, get_load_generator_config, get_config
 
 
 class GenLoad(object):
 
     def __init__(self,
                  debug=False,
-                 workload_requests_params=None,
+                 funk_name=None,
                  wait_period=0,
                  workload=None,
                  dryrun=False,
-                 duration=0):
+                 duration=0,
+                 funk_config=None
+                 ):
         self.debug = debug
-        self.workload_requests_params = workload_requests_params
+        self.funk_name = funk_name
         self.workload = workload
         self.dryrun = dryrun
         self.wait_period = wait_period
         self.duration = duration
+        self.funk_params = funk_config['params']
+        self.funk_config = funk_config
+        self.api = get_rest_api(funk_config['api_name'])
+        self.api_url = construct_api_url(self.api['id'], get_region_name(), funk_config['api_stage'], funk_config['api_base_path'])
 
     def send_request(self, api, payload):
         if not self.dryrun:
@@ -51,18 +43,8 @@ class GenLoad(object):
             print(f"send_request - api: {api}; payload: {json.dumps(payload)}")
             return None
 
-    def send_low_workload_request(self):
-        rp = self.workload_requests_params['low']
-        self.send_request(api = rp['api'], payload = rp['payload'])
-
-    def send_high_workload_request(self):
-        rp = self.workload_requests_params['high']
-        self.send_request(api = rp['api'], payload = rp['payload'])
-
     def send_workload_request(self):
-        match self.workload:
-            case 'low': self.send_low_workload_request()
-            case 'hih': self.send_high_workload_request()
+        self.send_request(api = self.api_url, payload = None)
 
     def run(self):
         start_time = datetime.utcnow()
@@ -72,9 +54,7 @@ class GenLoad(object):
         while (datetime.utcnow() - start_time).total_seconds() < self.duration:
             try:
 
-                match self.workload:
-                    case 'low': self.send_low_workload_request()
-                    case 'hih': self.send_high_workload_request()
+                self.send_workload_request()
 
                 if self.wait_period > 0:
                     time.sleep(self.wait_period)
@@ -94,33 +74,34 @@ class GenLoad(object):
 
 if __name__ == '__main__':
 
+    funk_names = get_funk_names()
+    config = get_config()
+    funktions_config = config['funk_generator']
+    load_gen_config = config['load_generator']
+
     parser = argparse.ArgumentParser(description='Run the lambda function load generator.')
     parser.add_argument('--action', default="run", choices=['run', 'test'], help='Run system continuously or test a single function')
     parser.add_argument('--dryrun', action='store_true', help='Whether or not to send/use-real requests.')
-    parser.add_argument('--workload',
-                        required=True,
-                        choices=[
-                            'decompress',
-                            'high'],
-                        help='Which function to run.')
+    parser.add_argument('--funk-name', required=True, choices=funk_names, help='Which function to run.')
 
     args = parser.parse_args()
     print(f'args: {args}')
 
     action = args.action
     dryrun = args.dryrun
-    workload = args.workload
+    funk_name = args.funk_name
 
     print(f'action: {action}')
     print(f'dryrun: {dryrun}')
-    print(f'workload: {workload}')
+    print(f'funk_name: {funk_name}')
 
     gl = GenLoad(
-        debug=config['debug'],
-        workload_requests_params=config['workload_requests_params'],
-        workload=workload,
+        debug=load_gen_config['debug'],
+        funk_name=funk_name,
         dryrun=dryrun,
-        duration=config['duration']
+        duration=load_gen_config['duration'],
+        wait_period=load_gen_config['wait_period'],
+        funk_config=funktions_config[funk_name]
     )
 
     match args.action:
