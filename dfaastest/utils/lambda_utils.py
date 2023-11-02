@@ -198,7 +198,6 @@ def get_rest_api(rest_api_name):
     return None
 
 
-
 def construct_api_url(api_id, region, api_stage, api_base_path):
     """
     Constructs the URL of the REST API.

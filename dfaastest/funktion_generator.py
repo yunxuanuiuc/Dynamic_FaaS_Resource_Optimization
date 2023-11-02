@@ -1,11 +1,5 @@
 import argparse
 import logging
-import os
-import time
-import yaml
-
-import boto3
-from botocore.exceptions import ClientError
 
 from utils.config_utils import get_funk_names, get_config
 from utils.lambda_utils import create

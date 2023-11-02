@@ -16,3 +16,16 @@ funk_generator:
     api_base_path: 'mcs598-dfaastest-decompress'
     api_stage: 'test'
     params: []
+
+database:
+  host: ''
+  user: ''
+  pass: ''
+  db_name: ''
+  table: ''
+
+cmab_agent:
+  function_name: 'cmab-agent'
+  api_name: 'cmab-agent-rest-api'
+  api_base_path: 'cmab-agent'
+  api_stage: 'test'

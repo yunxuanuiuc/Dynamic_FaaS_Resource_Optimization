@@ -1,11 +1,12 @@
 import argparse
 import json
-import requests
 import time
 from datetime import datetime
 
+import requests
+
+from utils.config_utils import get_funk_names, get_config
 from utils.lambda_utils import get_rest_api, construct_api_url, get_region_name
-from utils.config_utils import get_funk_names, get_load_generator_config, get_config
 
 
 class GenLoad(object):
