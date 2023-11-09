@@ -6,9 +6,6 @@
     },
     "action": "recommend",
     "Request": {
-      "memory": 128,
-      "probability": 0.5,
-      "cost": 1,
       "bytes": 11
     },
     "Keys": {

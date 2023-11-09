@@ -1,0 +1,49 @@
+In this example, the toy problem is:
+ - We want to choose between two memory sizes, 64 and 128.
+ - The optimization target is "time" (the lower the better)
+ - We only have one feature, "bytes".
+
+ For both "recommend" and "observe" requests, these are required:
+ - "S3": {"bucket": bucket name, "key": name of the model file}
+ - "action": "recommend" or "observe"
+ - "Keys": this specifies the keys in the "Request" item. the values here
+ should map to the keys in the "Request"
+    - "feature_keys": ["bytes"] <- this is a list of all features
+    to be consumed. if there is another feature called "random", then this
+    list will look like ["bytes", "random"]
+    - "mem_key": "memory"
+    - "cost_key": "cost"
+    - "prob_key": "probability"
+ - "config": this describes the problem space
+    - "memory_list": list of candidate memory sizes
+    - "objective": "time" or "cost"
+    - "features": list of feature keys, should be same as the previous
+    "feature_keys" (can optimize this later)
+    - "model_name": name of the model, without suffix. The model filename in
+    this case is "example.vw", but we only need to input "example" (can
+    optimize this later)
+
+ For "observe", we need the following information in "Request"
+ - "memory": the memory used in this event. (64 or 128, in our example)
+ - "probability": the probability that this memory was chosen (this is
+ part of the output from the "recommend" request from the previous round)
+ - "cost": either negative time, or negative budget. Numerical values. This is
+ because vowpalwabbit looks to MAXIMIZE the reward/minimize the cost. Units are
+ flexible, as long as we make sure for a given FaaS target function we always
+ use the same unit.
+ - "bytes": for each feature specified in "feature_keys", we want a key-value pair
+ (so if we have another "random" feature with value 2, add the ("random":2) item
+ to "Request")
+
+- Output: the agent will just update the model. it should not omit any useful output.
+
+ For "recommend", we only need the features in "Request":
+ - "bytes": 1
+
+ - Output: the agent will output both the recommended memory size, as well as the
+ probability associated with this selected memory size.
+ {"result":
+    {"recommended_memory": 64,
+    "action_probability": 0.955}
+ }
+
