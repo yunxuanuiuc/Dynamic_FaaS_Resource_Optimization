@@ -1,0 +1,34 @@
+{
+  "Event": {
+    "S3": {
+      "bucket": "dfaastest-cmab-agent",
+      "key": "example.model"
+    },
+    "action": "recommend",
+    "Request": {
+      "memory": 128,
+      "probability": 0.5,
+      "cost": 1,
+      "bytes": 11
+    },
+    "Keys": {
+      "feature_keys": [
+        "bytes"
+      ],
+      "mem_key": "memory",
+      "cost_key": "cost",
+      "prob_key": "probability"
+    },
+    "config": {
+      "memory_list": [
+        64,
+        128
+      ],
+      "objective": "time",
+      "features": [
+        "bytes"
+      ],
+      "model_name": "example"
+    }
+  }
+}
