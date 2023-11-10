@@ -70,7 +70,7 @@ class DfaastestOperator(object):
                 for record in records:
                     print(f"record: {record}")
 
-                    self.cmab_client.send_request(payload=record[1])
+                    self.cmab_client.send_observe(payload=record[1])
 
                     self.db.update_record_status(record[0], 'P')
 
