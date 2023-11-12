@@ -16,6 +16,7 @@ funk_generator:
     api_base_path: 'mcs598-dfaastest-decompress'
     api_stage: 'test'
     params: []
+    module: 'synthetic_functions.decompress'
 
 database:
   host: ''

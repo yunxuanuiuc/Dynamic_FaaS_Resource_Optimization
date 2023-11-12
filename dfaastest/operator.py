@@ -2,6 +2,7 @@ import argparse
 import datetime
 import time
 
+from funk_updater import FunkUpdater
 from utils.config_utils import get_config
 from utils.database import DB
 from cmab_client import CmabClient
@@ -32,7 +33,10 @@ class DfaastestOperator(object):
 
         self.cmab_client = CmabClient(self.config)
 
-        self.run()
+        # TODO Change this to being dynamically updated based on the function being tested
+        self.funk_updater = FunkUpdater(self.config['funk_generator']['decompress'])
+
+        #self.run()
 
     def get_data(self):
         print(f"DfaastestOperator get_data...")
@@ -40,6 +44,7 @@ class DfaastestOperator(object):
         if not self.dryrun:
             records = self.db.query(sql='select * from logs_processor_data where status is null order by created_date', params=None)
         else:
+            # dryrun simulated sample record
             records = [
                 (
                     '32cf8aaa-ae6e-4b11-93f8-370b8fc58bab',
@@ -67,12 +72,17 @@ class DfaastestOperator(object):
 
             if records:
 
+                # Step 1 Observe
                 for record in records:
                     print(f"record: {record}")
 
                     self.cmab_client.send_observe(payload=record[1])
 
                     self.db.update_record_status(record[0], 'P')
+
+                # Step 2 Recommend
+                recommendation_response = self.cmab_client.send_recommend(payload={"payload_size": 1}) # TODO change this
+                self.funk_updater.update_function_memory(memory=recommendation_response.recommended_memory)
 
                 if self.dryrun:
                     break

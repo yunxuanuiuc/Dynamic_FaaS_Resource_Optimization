@@ -1,3 +1,4 @@
+import json
 import logging
 import os
 import time
@@ -213,6 +214,15 @@ def construct_api_url(api_id, region, api_stage, api_base_path):
         f'{api_stage}/{api_base_path}'
     logger.info("Constructed REST API base URL: %s.", api_url)
     return api_url
+
+
+def update_memory(funk_name, memory):
+    try:
+        lambda_client = boto3.client('lambda')
+        lambda_client.update_function_configuration(FunctionName=funk_name, MemorySize=memory)
+    except Exception as e:
+        print(f"Error occurred while updating the function {funk_name} memory to {memory} - error: {e}")
+        raise e
 
 
 # snippet-start:[python.example_code.python.LambdaWrapper.full]
