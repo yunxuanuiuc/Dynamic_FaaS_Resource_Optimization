@@ -76,8 +76,11 @@ class CmabClient(object):
         self.rest_api_url = construct_api_url(self.api['id'], get_region_name(), self.cmab_config['api_stage'], self.cmab_config['api_base_path'])
         print(f"CmabClient.__init__ - rest_api_url: {self.rest_api_url}")
 
+        # Initialize the client for memory and probability from the CmabAgent
         recommendation = self.send_recommend({"payload_size": 1})
         print(f"CmabClient.__init__ - recommendation: {recommendation}")
+        self.memory = recommendation['recommended_memory']
+        self.probability = recommendation['action_probability']
 
     def send_request(self, payload):
         if not self.dryrun:
@@ -117,6 +120,8 @@ class CmabClient(object):
         request_payload = deepcopy(self.request_recommend_templates)
         request_payload["Event"]["Request"]["bytes"] = payload["payload_size"]
 
-        print(f'send_observe - request_payload: {request_payload}')
+        print(f'send_recommend - request_payload: {request_payload}')
 
-        return self.send_request(request_payload)
+        recommendation_response = self.send_request(request_payload)
+        print(f'send_recommend - response: {recommendation_response}')
+        return recommendation_response['result']

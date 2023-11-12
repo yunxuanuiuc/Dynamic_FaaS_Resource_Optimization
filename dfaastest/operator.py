@@ -36,13 +36,14 @@ class DfaastestOperator(object):
         # TODO Change this to being dynamically updated based on the function being tested
         self.funk_updater = FunkUpdater(self.config['funk_generator']['decompress'])
 
-        #self.run()
+        self.run()
 
     def get_data(self):
         print(f"DfaastestOperator get_data...")
 
         if not self.dryrun:
             records = self.db.query(sql='select * from logs_processor_data where status is null order by created_date', params=None)
+
         else:
             # dryrun simulated sample record
             records = [
@@ -81,8 +82,8 @@ class DfaastestOperator(object):
                     self.db.update_record_status(record[0], 'P')
 
                 # Step 2 Recommend
-                recommendation_response = self.cmab_client.send_recommend(payload={"payload_size": 1}) # TODO change this
-                self.funk_updater.update_function_memory(memory=recommendation_response.recommended_memory)
+                recommendation = self.cmab_client.send_recommend(payload={"payload_size": 1}) # TODO change this
+                self.funk_updater.update_function_memory(memory=recommendation['recommended_memory'])
 
                 if self.dryrun:
                     break
