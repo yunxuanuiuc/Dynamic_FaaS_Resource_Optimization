@@ -14,7 +14,7 @@ class CmabClient(object):
                 "bucket": "dfaastest-cmab-agent",
                 "key": "example.model"
             },
-            "action": "recommend",
+            "action": None,
             "Request": {
             },
             "Keys": {
@@ -41,6 +41,7 @@ class CmabClient(object):
 
     request_observe_templates = {
         "Event": {
+            "action": "observe",
             "Request": {
                 "memory": 0,
                 "probability": None,
@@ -52,12 +53,15 @@ class CmabClient(object):
 
     request_recommend_templates = {
         "Event": {
+            "action": "recommend",
             "Request": {
                 "bytes": 1
             },
         }
     }
 
+    # Predicted values (initially set to 0)
+    memory = 0
     probability = 0.0
 
     def __init__(self, config, debug=False, dryrun=False):
@@ -70,12 +74,16 @@ class CmabClient(object):
 
         self.api = get_rest_api(self.cmab_config['api_name'])
         self.rest_api_url = construct_api_url(self.api['id'], get_region_name(), self.cmab_config['api_stage'], self.cmab_config['api_base_path'])
+        print(f"CmabClient.__init__ - rest_api_url: {self.rest_api_url}")
+
+        recommendation = self.send_recommend({"payload_size": 1})
+        print(f"CmabClient.__init__ - recommendation: {recommendation}")
 
     def send_request(self, payload):
         if not self.dryrun:
 
             request_payload = deepcopy(self.request_templates)
-            request_payload["Event"]["Request"] = payload["Event"]["Request"]
+            request_payload["Event"] = { **request_payload["Event"], **payload["Event"] }
 
             print(f'send_request - request_payload: {request_payload}')
 

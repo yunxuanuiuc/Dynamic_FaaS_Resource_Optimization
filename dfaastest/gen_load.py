@@ -2,6 +2,7 @@ import argparse
 import json
 import time
 from datetime import datetime
+from importlib import import_module
 
 import requests
 
@@ -30,6 +31,7 @@ class GenLoad(object):
         self.funk_config = funk_config
         self.api = get_rest_api(funk_config['api_name'])
         self.api_url = construct_api_url(self.api['id'], get_region_name(), funk_config['api_stage'], funk_config['api_base_path'])
+        self.funk_module = import_module(funk_config['module'])
 
     def send_request(self, api, payload):
         if not self.dryrun:
@@ -45,7 +47,9 @@ class GenLoad(object):
             return None
 
     def send_workload_request(self):
-        self.send_request(api = self.api_url, payload = None)
+        payload = self.funk_module.payload_generator()
+
+        self.send_request(api=self.api_url, payload=payload)
 
     def run(self):
         start_time = datetime.utcnow()
