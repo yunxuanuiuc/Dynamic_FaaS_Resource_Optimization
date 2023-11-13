@@ -77,7 +77,7 @@ class CmabClient(object):
         print(f"CmabClient.__init__ - rest_api_url: {self.rest_api_url}")
 
         # Initialize the client for memory and probability from the CmabAgent
-        recommendation = self.send_recommend({"payload_size": 1})
+        recommendation = self.send_recommend({"payload_size": 1}) # TODO get a recommendation based on DB data
         print(f"CmabClient.__init__ - recommendation: {recommendation}")
         self.memory = recommendation['recommended_memory']
         self.probability = recommendation['action_probability']
@@ -107,9 +107,9 @@ class CmabClient(object):
 
     def send_observe(self, payload):
         request_payload = deepcopy(self.request_observe_templates)
-        request_payload["Event"]["Request"]["memory"] = payload["memory_size"]
+        request_payload["Event"]["Request"]["memory"] = payload["max_memory_used"]
         request_payload["Event"]["Request"]["probability"] = self.probability
-        request_payload["Event"]["Request"]["cost"] = 0 - payload["billed_duration"] # negative
+        request_payload["Event"]["Request"]["cost"] = 0 - int(payload["billed_duration"]) # negative
         request_payload["Event"]["Request"]["bytes"] = payload["payload_size"]
 
         print(f'send_observe - request_payload: {request_payload}')

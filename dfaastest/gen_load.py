@@ -87,7 +87,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Run the lambda function load generator.')
     parser.add_argument('--action', default="run", choices=['run', 'test'], help='Run system continuously or test a single function')
     parser.add_argument('--dryrun', action='store_true', help='Whether or not to send/use-real requests.')
-    parser.add_argument('--funk-name', required=True, choices=funk_names, help='Which function to run.')
+    parser.add_argument('--funk-name', required=True, choices=funk_names, help='Which function to generate load for?')
 
     args = parser.parse_args()
     print(f'args: {args}')

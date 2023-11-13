@@ -3,20 +3,26 @@ import datetime
 import time
 
 from funk_updater import FunkUpdater
-from utils.config_utils import get_config
+from utils.config_utils import get_config, get_funk_names
 from utils.database import DB
 from cmab_client import CmabClient
 
 
 class DfaastestOperator(object):
 
-    def __init__(self, config, dryrun):
+    def __init__(self, config, dryrun, funk_name):
         self.config = config
         self.dryrun = dryrun
 
-    def start(self):
-        print(f"DfaastestOperator starting...")
+        self.cmab_client = CmabClient(self.config)
 
+        self.funk_name = funk_name
+        self.funk_updater = FunkUpdater(self.config['funk_generator'][funk_name])
+
+        self.wait_period = config['operator']['wait_period']
+        self.recommend_payload_algorithm = config['operator']['recommend_payload_algorithm']
+
+        # connect to DB
         self.db_config = self.config['database']
 
         DB_HOST = self.db_config['host']
@@ -31,10 +37,8 @@ class DfaastestOperator(object):
             print("ERROR: Unexpected error: Could not connect to the PostgreSQL instance.")
             raise e
 
-        self.cmab_client = CmabClient(self.config)
-
-        # TODO Change this to being dynamically updated based on the function being tested
-        self.funk_updater = FunkUpdater(self.config['funk_generator']['decompress'])
+    def start(self):
+        print(f"DfaastestOperator starting...")
 
         self.run()
 
@@ -42,13 +46,23 @@ class DfaastestOperator(object):
         print(f"DfaastestOperator get_data...")
 
         if not self.dryrun:
-            records = self.db.query(sql='select * from logs_processor_data where status is null order by created_date', params=None)
+            records = self.db.query(
+                sql='''
+            select *
+              from logs_processor_data
+             where status is null
+               and function_name = %s
+             order by created_date
+             ''',
+                params=(self.funk_name,)
+            )
 
         else:
             # dryrun simulated sample record
             records = [
                 (
                     '32cf8aaa-ae6e-4b11-93f8-370b8fc58bab',
+                    'decompress',
                     {
                         'duration': '1.90',
                         'memory_size': '128',
@@ -64,6 +78,60 @@ class DfaastestOperator(object):
 
         return records
 
+    def get_last_x_records(self, limit=None):
+        print(f"DfaastestOperator get_last_x_records...")
+
+        if not self.dryrun:
+
+            query = '''
+            select *
+              from logs_processor_data
+             where function_name = %s
+               and status is not null
+             order by created_date desc
+            '''
+
+            if limit:
+                query += f'''
+                limit {limit}
+                '''
+
+            records = self.db.query(sql=query, params=(self.funk_name,))
+
+        else:
+            # dryrun simulated sample record
+            records = [
+                (
+                    '32cf8aaa-ae6e-4b11-93f8-370b8fc58bab',
+                    'decompress',
+                    {
+                        'duration': '1.90',
+                        'memory_size': '128',
+                        'billed_duration': '2',
+                        'max_memory_used': '37'
+                    },
+                    datetime.datetime(2023, 11, 1, 20, 4, 59, 515001),
+                    None
+                )
+            ]
+
+        print(f"DfaastestOperator.get_data - records: {records}")
+
+        return records
+
+    def get_average_payload(self, records):
+        if records:
+            cumulative_payload = 0
+
+            for record in records:
+                print(f"get_average_payload - record: {record}")
+                payload = record[2]
+                cumulative_payload += int(payload["payload_size"])
+
+            return cumulative_payload / len(records)
+        else:
+            return 1
+
     def run(self):
         print(f"DfaastestOperator running...")
 
@@ -77,19 +145,33 @@ class DfaastestOperator(object):
                 for record in records:
                     print(f"record: {record}")
 
-                    self.cmab_client.send_observe(payload=record[1])
+                    self.cmab_client.send_observe(payload=record[2]) # 2 is the payload
 
                     self.db.update_record_status(record[0], 'P')
 
                 # Step 2 Recommend
-                recommendation = self.cmab_client.send_recommend(payload={"payload_size": 1}) # TODO change this
+                payload_size = 1
+                match self.recommend_payload_algorithm:
+                    case 'wait_period':
+                        payload_size = self.get_average_payload(records)
+
+                    case 'last_10':
+                        last_10_records = self.get_last_x_records(10)
+                        payload_size = self.get_average_payload(last_10_records)
+
+                    case 'last_100':
+                        last_100_records = self.get_last_x_records(100)
+                        payload_size = self.get_average_payload(last_100_records)
+
+                recommendation = self.cmab_client.send_recommend(payload={"payload_size": payload_size})
                 self.funk_updater.update_function_memory(memory=recommendation['recommended_memory'])
+                self.cmab_client.probability = recommendation['action_probability']
 
                 if self.dryrun:
                     break
 
             else:
-                time.sleep(60 * 5)  # wait before checking again
+                time.sleep(self.wait_period)  # wait before checking again
 
                 if self.dryrun:
                     break
@@ -97,18 +179,20 @@ class DfaastestOperator(object):
 
 if __name__ == '__main__':
 
+    funk_names = get_funk_names()
     config = get_config()
 
     parser = argparse.ArgumentParser(description='Run the dfaastest operator for integration between the Logs Processor and CMAB agent.')
     parser.add_argument('--action', default="run", choices=['run', 'test'], help='Run operator continuously or do a test run')
     parser.add_argument('--dryrun', action='store_true', help='Whether or not to run continuously, read database, ie. run for realz.')
+    parser.add_argument('--funk-name', required=True, choices=funk_names, help='Which function to operate?')
 
     args = parser.parse_args()
     print(f'args: {args}')
 
     match args.action:
         case 'run':
-            operator = DfaastestOperator(config, args.dryrun)
+            operator = DfaastestOperator(config=config, dryrun=args.dryrun, funk_name=args.funk_name)
             operator.start()
 
         case 'test':

@@ -490,5 +490,5 @@ class LambdaWrapper:
             time.sleep(1)
 
 
-if __name__ == '__main__':
-    get_rest_api("dfaastest-decompress-rest-api")
+# if __name__ == '__main__':
+#     get_rest_api("dfaastest-decompress-rest-api")

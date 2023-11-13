@@ -1,7 +1,7 @@
 load_generator:
   debug: True
   duration: 5                # number of seconds for the run
-  wait_period: 0.1           # in seconds, for the number of milliseconds divide by 1000 (ms/s)
+  wait_period: 0.1           # in seconds
 
 funk_generator:
   decompress:
@@ -30,3 +30,7 @@ cmab_agent:
   api_name: 'cmab-agent-rest-api'
   api_base_path: 'cmab-agent'
   api_stage: 'test'
+
+operator:
+  wait_period: 300 # seconds
+  recommend_payload_algorithm: 'wait_period' # 'wait_period', 'last_10', 'last_100'
