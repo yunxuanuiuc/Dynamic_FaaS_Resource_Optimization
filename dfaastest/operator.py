@@ -10,13 +10,16 @@ from cmab_client import CmabClient
 
 class DfaastestOperator(object):
 
-    def __init__(self, config, dryrun, funk_name):
+    def __init__(self, config, dryrun, funk_name, experiment_id):
         self.config = config
         self.dryrun = dryrun
-
-        self.cmab_client = CmabClient(self.config)
-
         self.funk_name = funk_name
+        self.experiment_id = experiment_id
+
+        self.config['cmab_agent']['model_funk'] = self.funk_name
+        self.config['cmab_agent']['model_experiment'] = self.experiment_id
+        self.cmab_client = CmabClient(self.config['cmab_agent'])
+
         self.funk_updater = FunkUpdater(self.config['funk_generator'][funk_name])
 
         self.wait_period = config['operator']['wait_period']
@@ -186,13 +189,19 @@ if __name__ == '__main__':
     parser.add_argument('--action', default="run", choices=['run', 'test'], help='Run operator continuously or do a test run')
     parser.add_argument('--dryrun', action='store_true', help='Whether or not to run continuously, read database, ie. run for realz.')
     parser.add_argument('--funk-name', required=True, choices=funk_names, help='Which function to operate?')
+    parser.add_argument('--experiment-id', required=True, help='An experiment name or identifier to differentiate between experiment runs.')
 
     args = parser.parse_args()
     print(f'args: {args}')
 
     match args.action:
         case 'run':
-            operator = DfaastestOperator(config=config, dryrun=args.dryrun, funk_name=args.funk_name)
+            operator = DfaastestOperator(
+                config=config,
+                dryrun=args.dryrun,
+                funk_name=args.funk_name,
+                experiment_id=args.experiment_id
+            )
             operator.start()
 
         case 'test':

@@ -17,6 +17,9 @@ funk_generator:
     api_stage: 'test'
     params: []
     module: 'synthetic_functions.decompress'
+  cpu_intensive: # no params
+  mem_intensive: # no trigger rn, no params
+
 
 database:
   host: ''
@@ -30,6 +33,8 @@ cmab_agent:
   api_name: 'cmab-agent-rest-api'
   api_base_path: 'cmab-agent'
   api_stage: 'test'
+  model_funk:  # passed in at runtime from the operator
+  model_experiment:  # passed in at runtime from the operator
 
 operator:
   wait_period: 300 # seconds

@@ -2,8 +2,15 @@ import gzip
 import json
 import random
 import string
+import sys
 
 def lambda_handler(event, context):
+
+    request_id = context.aws_request_id
+    payload_size = sys.getsizeof(json.dumps(event))
+    function_type = 'CPU'
+    function_id = 'dfaastest_decompress'
+    print(f'Custom REPORT RequestId: {request_id} Function Type: {function_type} Function Id: {function_id} Payload Size: {payload_size}')
 
     content = event["body"].encode('utf8')
 

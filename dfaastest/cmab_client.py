@@ -64,13 +64,18 @@ class CmabClient(object):
     memory = 0
     probability = 0.0
 
-    def __init__(self, config, debug=False, dryrun=False):
+    def __init__(self, cmab_config, debug=False, dryrun=False):
         print(f"CmabClient")
-        self.config = config
+        self.cmab_config = cmab_config
         self.debug = debug
         self.dryrun = dryrun
 
-        self.cmab_config = self.config['cmab_agent']
+        self.model_funk = self.cmab_config['model_funk']
+        self.model_experiment = self.cmab_config['model_experiment']
+
+        self.model_name = f"{self.model_funk}_{self.model_experiment}"
+        self.request_templates['Event']['S3']['key'] = f"{self.model_name}.model"
+        self.request_templates['Event']['config']['model_name'] = self.model_name
 
         self.api = get_rest_api(self.cmab_config['api_name'])
         self.rest_api_url = construct_api_url(self.api['id'], get_region_name(), self.cmab_config['api_stage'], self.cmab_config['api_base_path'])
@@ -92,10 +97,7 @@ class CmabClient(object):
 
             r = requests.post(self.rest_api_url, data=json.dumps(request_payload))
 
-            try:
-                res = r.json()['body']
-            except Exception as e:
-                res = r.text
+            res = r.json()['body']
 
             if self.debug:
                 print(f"CmabClient.send_request - response JSON body: {res}")
