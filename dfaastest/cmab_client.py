@@ -27,8 +27,10 @@ class CmabClient(object):
             },
             "config": {
                 "memory_list": [
-                    64,
-                    128
+                    128,
+                    256,
+                    512,
+                    1024
                 ],
                 "objective": "time",
                 "features": [

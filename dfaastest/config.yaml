@@ -1,7 +1,7 @@
 load_generator:
   debug: True
-  duration: 5                # number of seconds for the run
-  wait_period: 0.1           # in seconds
+  duration: 30                # number of seconds for the run
+  wait_period: 0.01           # in seconds
 
 funk_generator:
   decompress:
@@ -17,14 +17,14 @@ funk_generator:
     api_stage: 'test'
     params: []
     module: 'synthetic_functions.decompress'
-  cpu_intensive:
+  factorial_1:
     function_name: 'CpuIntensiveFunction'
     api_name: 'CpuIntensiveFunction-API'
     api_base_path: 'CpuIntensiveFunction'
     api_stage: 'Dev'
     params: []
     module: 'synthetic_functions.cpu_intensive'
-  mem_intensive:
+  array_summation_1:
     function_name: 'MemoryIntensiveFunction'
     api_name: 'MemoryIntensiveFunction-API'
     api_base_path: 'MemoryIntensiveFunction'
@@ -56,5 +56,5 @@ cmab_agent:
   model_experiment:  # passed in at runtime from the operator
 
 operator:
-  wait_period: 300 # seconds
+  wait_period: 30 # seconds
   recommend_payload_algorithm: 'wait_period' # 'wait_period', 'last_10', 'last_100'

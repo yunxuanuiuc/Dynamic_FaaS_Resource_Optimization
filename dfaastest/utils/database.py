@@ -25,8 +25,11 @@ class DB(object):
 
             self.postgres.commit()
 
-    def update_record_status(self, request_id, status):
+    def update_record_status(self, request_id, status, experiment_id):
         with self.postgres.cursor() as cursor:
-            cursor.execute('UPDATE logs_processor_data SET status = %s WHERE request_id = %s', (status, request_id))
+            cursor.execute(
+                'UPDATE logs_processor_data SET status = %s, experiment_id = %s WHERE request_id = %s',
+                (status, experiment_id, request_id)
+            )
 
             self.postgres.commit()

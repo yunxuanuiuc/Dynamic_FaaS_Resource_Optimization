@@ -150,7 +150,7 @@ class DfaastestOperator(object):
 
                     self.cmab_client.send_observe(payload=record[2]) # 2 is the payload
 
-                    self.db.update_record_status(record[0], 'P')
+                    self.db.update_record_status(record[0], 'P', self.experiment_id)
 
                 # Step 2 Recommend
                 payload_size = 1
