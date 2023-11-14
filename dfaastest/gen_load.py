@@ -36,10 +36,14 @@ class GenLoad(object):
     def send_request(self, api, payload):
         if not self.dryrun:
             r = requests.post(api, data=json.dumps(payload))
-            res = r.json()['body']
+
+            try:
+                res = r.json()['body']
+            except Exception as e:
+                res = r.text
 
             if self.debug:
-                print(f"send_request - response JSON body: {res}")
+                print(f"send_request - response: {res}")
 
             return res
         else:

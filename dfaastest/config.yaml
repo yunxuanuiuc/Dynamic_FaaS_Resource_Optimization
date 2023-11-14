@@ -17,8 +17,27 @@ funk_generator:
     api_stage: 'test'
     params: []
     module: 'synthetic_functions.decompress'
-  cpu_intensive: # no params
-  mem_intensive: # no trigger rn, no params
+  cpu_intensive:
+    function_name: 'CpuIntensiveFunction'
+    api_name: 'CpuIntensiveFunction-API'
+    api_base_path: 'CpuIntensiveFunction'
+    api_stage: 'Dev'
+    params: []
+    module: 'synthetic_functions.cpu_intensive'
+  mem_intensive:
+    function_name: 'MemoryIntensiveFunction'
+    api_name: 'MemoryIntensiveFunction-API'
+    api_base_path: 'MemoryIntensiveFunction'
+    api_stage: 'default'
+    params: []
+    module: 'synthetic_functions.mem_intensive'
+  image_processing:
+    function_name: 'ImageProcessingFunction'
+    api_name: 'ImageProcessingFunction-API'
+    api_base_path: 'ImageProcessingFunction'
+    api_stage: 'default'
+    params: [ ]
+    module: 'synthetic_functions.image_processing'
 
 
 database:

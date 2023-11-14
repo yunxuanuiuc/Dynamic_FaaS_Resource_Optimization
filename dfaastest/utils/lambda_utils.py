@@ -196,6 +196,17 @@ def get_rest_api(rest_api_name):
         if api['name'] == rest_api_name:
             return api
 
+    apig_client = boto3.client('apigatewayv2')
+
+    http_apis = apig_client.get_apis()['Items']
+    print(f"http_apis: {http_apis}")
+
+    for http_api in http_apis :
+        print(f"http_api['Name']: {http_api['Name']}")
+
+        if http_api['Name'] == rest_api_name:
+            return { 'id': http_api['ApiId'] }
+
     return None
 
 
