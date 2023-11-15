@@ -1,2 +1,6 @@
+import random
+
+
 def payload_generator():
-    return None
+    n = random.randrange(5, 11)
+    return {"factorial_of": n}

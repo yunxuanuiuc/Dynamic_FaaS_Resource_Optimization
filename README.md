@@ -36,8 +36,17 @@ The following command will operate the decompress function:
 
 ## Step 7 Generate Load
 
-The following command will generate load for the decompress function:
+The following commands will generate load for the different functions:
 
-% python dfaastest/gen_load.py --action test --funk-name decompress 
+```
+% python dfaastest/gen_load.py --action run --funk-name factorial_1
+% python dfaastest/gen_load.py --action run --funk-name array_summation_1
+% python dfaastest/gen_load.py --action run --funk-name grayscale_conversion_1
+```
 
+The following command will run a test of the decompress function:
+
+```
+% python dfaastest/gen_load.py --action test --funk-name decompress
+```
 

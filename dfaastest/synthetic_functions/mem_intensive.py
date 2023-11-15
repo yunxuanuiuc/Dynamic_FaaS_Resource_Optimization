@@ -1,2 +1,6 @@
+import random
+
+
 def payload_generator():
-    return None
+    n = random.randrange(500000, 1000001)
+    return {"array_size": n}

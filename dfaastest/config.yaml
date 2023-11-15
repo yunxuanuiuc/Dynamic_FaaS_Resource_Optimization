@@ -1,7 +1,7 @@
 load_generator:
   debug: True
-  duration: 30                # number of seconds for the run
-  wait_period: 0.01           # in seconds
+  duration: 1                # number of seconds for the run
+  wait_period: 0.1           # in seconds
 
 funk_generator:
   decompress:
@@ -21,7 +21,7 @@ funk_generator:
     function_name: 'CpuIntensiveFunction'
     api_name: 'CpuIntensiveFunction-API'
     api_base_path: 'CpuIntensiveFunction'
-    api_stage: 'Dev'
+    api_stage: 'default'
     params: []
     module: 'synthetic_functions.cpu_intensive'
   array_summation_1:
@@ -31,7 +31,7 @@ funk_generator:
     api_stage: 'default'
     params: []
     module: 'synthetic_functions.mem_intensive'
-  image_processing:
+  grayscale_conversion_1:
     function_name: 'ImageProcessingFunction'
     api_name: 'ImageProcessingFunction-API'
     api_base_path: 'ImageProcessingFunction'
