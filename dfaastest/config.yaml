@@ -8,7 +8,7 @@ load_generator:
       duration: 10
 
 funk_generator:
-  decompress:
+  dfaastest_decompress:
     filename: 'dfaastest/synthetic_functions/decompress.py'
     zipfilename: 'dfaastest/synthetic_functions/decompress.zip'
     handler_name: 'dfaastest.synthetic_functions.decompress.lambda_handler'
