@@ -111,7 +111,7 @@ class CmabClient(object):
 
     def send_observe(self, payload):
         request_payload = deepcopy(self.request_observe_templates)
-        request_payload["Event"]["Request"]["memory"] = payload["max_memory_used"]
+        request_payload["Event"]["Request"]["memory"] = payload["memory_size"]
         request_payload["Event"]["Request"]["probability"] = self.probability
         request_payload["Event"]["Request"]["cost"] = 0 - int(payload["billed_duration"]) # negative
         request_payload["Event"]["Request"]["bytes"] = payload["payload_size"]
