@@ -1,7 +1,11 @@
 load_generator:
   debug: True
-  duration: 1                # number of seconds for the run
-  wait_period: 0.1           # in seconds
+  duration: 30                # number of seconds for the run
+  wait_periods:
+    - wait: 0.1           # in seconds
+      duration: 5
+    - wait: 5           # in seconds
+      duration: 10
 
 funk_generator:
   decompress:
