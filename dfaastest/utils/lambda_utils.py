@@ -231,6 +231,10 @@ def update_memory(funk_name, memory):
     try:
         lambda_client = boto3.client('lambda')
         lambda_client.update_function_configuration(FunctionName=funk_name, MemorySize=memory)
+        print(f"update_memory - updated function {funk_name} memory to {memory}")
+        new_function_configuration = lambda_client.get_function_configuration(FunctionName=funk_name)
+        print(f"update_memory - new_function_configuration: {new_function_configuration}")
+        assert new_function_configuration['MemorySize'] == memory
     except Exception as e:
         print(f"Error occurred while updating the function {funk_name} memory to {memory} - error: {e}")
         raise e
