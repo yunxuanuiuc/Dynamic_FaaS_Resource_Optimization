@@ -15,7 +15,7 @@ class GenLoad(object):
     def __init__(self,
                  debug=False,
                  funk_name=None,
-                 wait_period=0,
+                 wait_periods=None,
                  workload=None,
                  dryrun=False,
                  duration=0,
@@ -25,7 +25,7 @@ class GenLoad(object):
         self.funk_name = funk_name
         self.workload = workload
         self.dryrun = dryrun
-        self.wait_period = wait_period
+        self.wait_periods = wait_periods
         self.duration = duration
         self.funk_params = funk_config['params']
         self.funk_config = funk_config
@@ -61,15 +61,21 @@ class GenLoad(object):
 
         # Will need to kill the process or send it the kill signal
         while (datetime.utcnow() - start_time).total_seconds() < self.duration:
-            try:
 
-                self.send_workload_request()
+            # for each of the wait periods
+            for wait_period in self.wait_periods:
+                period_start_time = datetime.utcnow()
 
-                if self.wait_period > 0:
-                    time.sleep(self.wait_period)
+                while (datetime.utcnow() - period_start_time).total_seconds() < wait_period['duration']:
+                    try:
 
-            except Exception as e:
-                print(f'Exception ocurred while sending request: {e}')
+                        self.send_workload_request()
+
+                        if wait_period['wait'] > 0:
+                            time.sleep(wait_period['wait'])
+
+                    except Exception as e:
+                        print(f'Exception ocurred while sending request: {e}')
 
         print(f'Ended the run.')
 
@@ -109,7 +115,7 @@ if __name__ == '__main__':
         funk_name=funk_name,
         dryrun=dryrun,
         duration=load_gen_config['duration'],
-        wait_period=load_gen_config['wait_period'],
+        wait_periods=load_gen_config['wait_periods'],
         funk_config=funktions_config[funk_name]
     )
 
