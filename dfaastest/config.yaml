@@ -38,6 +38,13 @@ funk_generator:
     api_stage: 'default'
     params: [ ]
     module: 'synthetic_functions.image_processing'
+  big_data_processing_1:
+    function_name: 'BigDataProcessingFunction'
+    api_name: 'BigDataProcessingFunction-API'
+    api_base_path: 'BigDataProcessingFunction'
+    api_stage: 'default'
+    params: [ ]
+    module: 'synthetic_functions.big_data_processing'
 
 
 database:
