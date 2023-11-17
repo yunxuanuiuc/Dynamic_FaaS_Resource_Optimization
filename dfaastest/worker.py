@@ -167,8 +167,10 @@ class DfaastestOperator(object):
                         payload_size = self.get_average_payload(last_100_records)
 
                 recommendation = self.cmab_client.send_recommend(payload={"payload_size": payload_size})
+                print(f"getting recommendation from cmab agent: {recommendation['recommended_memory']}")
                 self.funk_updater.update_function_memory(memory=recommendation['recommended_memory'])
                 self.cmab_client.probability = recommendation['action_probability']
+                self.cmab_client.probability_dict = {self.cmab_client.mem_list[i]: recommendation['probability_list'][i] for i in range(len(self.cmab_client.mem_list))}
 
                 if self.dryrun:
                     break

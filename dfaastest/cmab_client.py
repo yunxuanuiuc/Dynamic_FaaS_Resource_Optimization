@@ -7,37 +7,31 @@ from utils.lambda_utils import get_region_name, construct_api_url, get_rest_api
 
 
 class CmabClient(object):
-
+    mem_list = [128, 256, 512, 1024, 2048]
     request_templates = {
         "Event": {
             "S3": {
                 "bucket": "dfaastest-cmab-agent",
-                "key": "example.model"
+                "key": "yunxuan_factorial_1117_no_feature_round2_inverse1.model"
             },
             "action": None,
             "Request": {
             },
             "Keys": {
                 "feature_keys": [
-                    "bytes"
+                   # "bytes"
                 ],
                 "mem_key": "memory",
                 "cost_key": "cost",
                 "prob_key": "probability"
             },
             "config": {
-                "memory_list": [
-                    128,
-                    256,
-                    512,
-                    1024,
-                    2048
-                ],
+                "memory_list": mem_list,
                 "objective": "time",
                 "features": [
-                    "bytes"
+                   # "bytes"
                 ],
-                "model_name": "example"
+                "model_name": "yunxuan_factorial_1117_no_feature_round2_inverse1"
             }
         }
     }
@@ -49,7 +43,7 @@ class CmabClient(object):
                 "memory": 0,
                 "probability": None,
                 "cost": 0,
-                "bytes": 0,
+#                 "bytes": 0,
             },
         }
     }
@@ -58,7 +52,7 @@ class CmabClient(object):
         "Event": {
             "action": "recommend",
             "Request": {
-                "bytes": 1
+#                 "bytes": 1
             },
         }
     }
@@ -72,6 +66,7 @@ class CmabClient(object):
         self.cmab_config = cmab_config
         self.debug = debug
         self.dryrun = dryrun
+        #self.mem_list = mem_list
 
         self.model_funk = self.cmab_config['model_funk']
         self.model_experiment = self.cmab_config['model_experiment']
@@ -89,6 +84,7 @@ class CmabClient(object):
         print(f"CmabClient.__init__ - recommendation: {recommendation}")
         self.memory = recommendation['recommended_memory']
         self.probability = recommendation['action_probability']
+        self.probability_dict = {self.mem_list[i]: recommendation['probability_list'][i] for i in range(len(self.mem_list))}
 
     def send_request(self, payload):
         if not self.dryrun:
@@ -113,9 +109,9 @@ class CmabClient(object):
     def send_observe(self, payload):
         request_payload = deepcopy(self.request_observe_templates)
         request_payload["Event"]["Request"]["memory"] = payload["memory_size"]
-        request_payload["Event"]["Request"]["probability"] = self.probability
-        request_payload["Event"]["Request"]["cost"] = 0 - int(payload["billed_duration"]) # negative
-        request_payload["Event"]["Request"]["bytes"] = payload["payload_size"]
+        request_payload["Event"]["Request"]["probability"] = self.probability_dict[payload["memory_size"]]
+        request_payload["Event"]["Request"]["cost"] = 1000/int(payload["billed_duration"]) # 300*1/time
+        #request_payload["Event"]["Request"]["bytes"] = payload["payload_size"]
 
         print(f'send_observe - request_payload: {request_payload}')
 
@@ -123,7 +119,7 @@ class CmabClient(object):
 
     def send_recommend(self, payload):
         request_payload = deepcopy(self.request_recommend_templates)
-        request_payload["Event"]["Request"]["bytes"] = payload["payload_size"]
+        #request_payload["Event"]["Request"]["bytes"] = payload["payload_size"]
 
         print(f'send_recommend - request_payload: {request_payload}')
 
