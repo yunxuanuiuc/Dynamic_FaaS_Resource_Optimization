@@ -15,7 +15,7 @@ class DfaastestOperator(object):
         self.dryrun = dryrun
         self.funk_name = funk_name
         self.experiment_id = experiment_id
-        self.num_of_record_observed = 0
+        self.num_of_records_observed = 0
 
         self.config['cmab_agent']['model_funk'] = self.funk_name
         self.config['cmab_agent']['model_experiment'] = self.experiment_id
@@ -168,9 +168,9 @@ class DfaastestOperator(object):
                 self.cmab_client.probability = recommendation['action_probability']
                 self.cmab_client.probability_dict = {self.cmab_client.mem_list[i]: recommendation['probability_list'][i] for i in range(len(self.cmab_client.mem_list))}
 
-                self.num_of_record_observed += len(records)
+                self.num_of_records_observed += len(records)
                 self.db.insert_recommendation_probability(
-                    self.funk_name, self.experiment_id, self.cmab_client.probability_dict, self.num_of_record_observed,
+                    self.funk_name, self.experiment_id, self.cmab_client.probability_dict, self.num_of_records_observed,
                     payload_size, recommendation['recommended_memory'], records[-1][2]["memory_size"]) # memory_size of last record
 
                 if self.dryrun:
