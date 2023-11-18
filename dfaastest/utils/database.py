@@ -36,15 +36,18 @@ class DB(object):
 
             self.postgres.commit()
 
-    def insert_recommendation_probability(self, function_name, experiment_id, probability, current_memory):
+    def insert_recommendation_probability(self, function_name, experiment_id, probability,
+                                          num_of_record_observed, payload_size, recommended_size, current_memory):
         for key, value in probability.items():
             probability[key] = round(value, 4)
 
         with self.postgres.cursor() as cursor:
             cursor.execute(
-                '''INSERT INTO recommandation_list (function_name, experiment_id, probability, current_memory, recorded_date) 
-                VALUES (%s, %s, %s::json, %s, %s)''',
-                (function_name, experiment_id, json.dumps(probability), current_memory, datetime.today())
+                '''INSERT INTO recommendation_record (function_name, experiment_id, probability, num_of_record_observed, 
+                recorded_date, payload_size, recommended_size, current_memory) 
+                VALUES (%s, %s, %s::json, %s, %s, %s, %s, %s)''',
+                (function_name, experiment_id, json.dumps(probability), num_of_record_observed,
+                 datetime.today(), payload_size, recommended_size, current_memory)
             )
 
             self.postgres.commit()
