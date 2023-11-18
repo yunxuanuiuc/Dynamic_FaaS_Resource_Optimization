@@ -69,3 +69,7 @@ cmab_agent:
 operator:
   wait_period: 30 # seconds
   recommend_payload_algorithm: 'wait_period' # 'wait_period', 'last_10', 'last_100'
+
+benchmarker:
+  duration: 1200 # for how long to run the benchmark for each of the functions on each of the memory settings
+  wait: 0.1

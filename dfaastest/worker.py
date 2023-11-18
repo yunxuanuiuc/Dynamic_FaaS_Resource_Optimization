@@ -40,11 +40,6 @@ class DfaastestOperator(object):
             print("ERROR: Unexpected error: Could not connect to the PostgreSQL instance.")
             raise e
 
-    def start(self):
-        print(f"DfaastestOperator starting...")
-
-        self.run()
-
     def get_data(self):
         print(f"DfaastestOperator get_data...")
 
@@ -181,6 +176,26 @@ class DfaastestOperator(object):
                 if self.dryrun:
                     break
 
+    def benchmark(self):
+        print(f"DfaastestOperator benchmark - starting...")
+
+        # To stop we need to kill the process
+        while True:
+            records = self.get_data()
+
+            if records:
+
+                # Step 1 Observe
+                for record in records:
+                    print(f"DfaastestOperator benchmark - record: {record}")
+                    self.db.update_record_status(record[0], 'B', self.experiment_id)
+
+            else:
+                time.sleep(self.wait_period)  # wait before checking again
+
+                if self.dryrun:
+                    break
+
 
 if __name__ == '__main__':
 
@@ -204,7 +219,4 @@ if __name__ == '__main__':
                 funk_name=args.funk_name,
                 experiment_id=args.experiment_id
             )
-            operator.start()
-
-        case 'test':
-            raise NotImplementedError
+            operator.run()

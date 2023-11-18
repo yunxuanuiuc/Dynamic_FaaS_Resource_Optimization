@@ -230,8 +230,17 @@ def construct_api_url(api_id, region, api_stage, api_base_path):
 def update_memory(funk_name, memory):
     try:
         lambda_client = boto3.client('lambda')
+
+        def confirm_function_config_updated():
+            function_configuration = lambda_client.get_function_configuration(FunctionName=funk_name)
+            while function_configuration['LastUpdateStatus'] != 'Successful':
+                time.sleep(0.1)
+                function_configuration = lambda_client.get_function_configuration(FunctionName=funk_name)
+
+        confirm_function_config_updated()
         lambda_client.update_function_configuration(FunctionName=funk_name, MemorySize=memory)
         print(f"update_memory - updated function {funk_name} memory to {memory}")
+        confirm_function_config_updated()
         new_function_configuration = lambda_client.get_function_configuration(FunctionName=funk_name)
         print(f"update_memory - new_function_configuration: {new_function_configuration}")
         assert new_function_configuration['MemorySize'] == memory

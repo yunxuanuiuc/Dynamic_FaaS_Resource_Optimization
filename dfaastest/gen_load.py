@@ -16,14 +16,12 @@ class GenLoad(object):
                  debug=False,
                  funk_name=None,
                  wait_periods=None,
-                 workload=None,
                  dryrun=False,
                  duration=0,
-                 funk_config=None
+                 funk_config=None,
                  ):
         self.debug = debug
         self.funk_name = funk_name
-        self.workload = workload
         self.dryrun = dryrun
         self.wait_periods = wait_periods
         self.duration = duration
@@ -116,7 +114,7 @@ if __name__ == '__main__':
         dryrun=dryrun,
         duration=load_gen_config['duration'],
         wait_periods=load_gen_config['wait_periods'],
-        funk_config=funktions_config[funk_name]
+        funk_config=funktions_config[funk_name],
     )
 
     match args.action:
