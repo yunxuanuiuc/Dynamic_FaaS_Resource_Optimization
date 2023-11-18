@@ -1,5 +1,7 @@
 import psycopg2
 from datetime import datetime
+import json
+
 
 class DB(object):
 
@@ -35,11 +37,14 @@ class DB(object):
             self.postgres.commit()
 
     def insert_recommendation_probability(self, function_name, experiment_id, probability, current_memory):
+        for key, value in probability.items():
+            probability[key] = round(value, 4)
+
         with self.postgres.cursor() as cursor:
             cursor.execute(
                 '''INSERT INTO recommandation_list (function_name, experiment_id, probability, current_memory, recorded_date) 
                 VALUES (%s, %s, %s::json, %s, %s)''',
-                (function_name, experiment_id, probability, current_memory, datetime.today())
+                (function_name, experiment_id, json.dumps(probability), current_memory, datetime.today())
             )
 
             self.postgres.commit()
