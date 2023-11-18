@@ -38,16 +38,17 @@ class DB(object):
 
     def insert_recommendation_probability(self, function_name, experiment_id, probability,
                                           num_of_record_observed, payload_size, recommended_size, current_memory):
+        probability_dict_for_print = {};
         for key, value in probability.items():
-            probability[key] = round(value, 4)
+            probability_dict_for_print[key] = '{:.4f}'.format(round(value, 4))
 
         with self.postgres.cursor() as cursor:
             cursor.execute(
-                '''INSERT INTO recommendation_record (function_name, experiment_id, probability, num_of_record_observed, 
+                '''INSERT INTO recommendation_record (function_name, experiment_id, probability, record_observed, 
                 recorded_date, payload_size, recommended_size, current_memory) 
                 VALUES (%s, %s, %s::json, %s, %s, %s, %s, %s)''',
-                (function_name, experiment_id, json.dumps(probability), num_of_record_observed,
-                 datetime.today(), payload_size, recommended_size, current_memory)
+                (function_name, experiment_id, json.dumps(probability_dict_for_print), num_of_record_observed,
+                 datetime.today().strftime('%F %T.%f')[:-3], payload_size, recommended_size, current_memory)
             )
 
             self.postgres.commit()
