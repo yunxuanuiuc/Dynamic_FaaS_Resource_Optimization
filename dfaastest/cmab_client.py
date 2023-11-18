@@ -12,14 +12,14 @@ class CmabClient(object):
         "Event": {
             "S3": {
                 "bucket": "dfaastest-cmab-agent",
-                "key": "yunxuan_factorial_1117_no_feature_round2_inverse1.model"
+                "key": "hao_factorial_1117_with_feature_round3_test_rec_table.model"
             },
             "action": None,
             "Request": {
             },
             "Keys": {
                 "feature_keys": [
-                   # "bytes"
+                    "bytes"
                 ],
                 "mem_key": "memory",
                 "cost_key": "cost",
@@ -29,7 +29,7 @@ class CmabClient(object):
                 "memory_list": mem_list,
                 "objective": "time",
                 "features": [
-                   # "bytes"
+                    "bytes"
                 ],
                 "model_name": "yunxuan_factorial_1117_no_feature_round2_inverse1"
             }
@@ -43,7 +43,7 @@ class CmabClient(object):
                 "memory": 0,
                 "probability": None,
                 "cost": 0,
-#                 "bytes": 0,
+                "bytes": 0,
             },
         }
     }
@@ -52,7 +52,7 @@ class CmabClient(object):
         "Event": {
             "action": "recommend",
             "Request": {
-#                 "bytes": 1
+                "bytes": 1
             },
         }
     }
@@ -111,7 +111,7 @@ class CmabClient(object):
         request_payload["Event"]["Request"]["memory"] = payload["memory_size"]
         request_payload["Event"]["Request"]["probability"] = self.probability_dict[payload["memory_size"]]
         request_payload["Event"]["Request"]["cost"] = 1000/int(payload["billed_duration"]) # 300*1/time
-        #request_payload["Event"]["Request"]["bytes"] = payload["payload_size"]
+        request_payload["Event"]["Request"]["bytes"] = payload["payload_size"]
 
         print(f'send_observe - request_payload: {request_payload}')
 
@@ -119,7 +119,7 @@ class CmabClient(object):
 
     def send_recommend(self, payload):
         request_payload = deepcopy(self.request_recommend_templates)
-        #request_payload["Event"]["Request"]["bytes"] = payload["payload_size"]
+        request_payload["Event"]["Request"]["bytes"] = payload["payload_size"]
 
         print(f'send_recommend - request_payload: {request_payload}')
 

@@ -1,6 +1,7 @@
 import argparse
 import datetime
 import time
+import json
 
 from funk_updater import FunkUpdater
 from utils.config_utils import get_config, get_funk_names
@@ -171,6 +172,8 @@ class DfaastestOperator(object):
                 self.funk_updater.update_function_memory(memory=recommendation['recommended_memory'])
                 self.cmab_client.probability = recommendation['action_probability']
                 self.cmab_client.probability_dict = {self.cmab_client.mem_list[i]: recommendation['probability_list'][i] for i in range(len(self.cmab_client.mem_list))}
+                self.db.insert_recommendation_probability(
+                    self.funk_name, self.experiment_id, json.dumps(self.cmab_client.probability_dict), records[-1][2]["memory_size"]) # memory_size of last record
 
                 if self.dryrun:
                     break
