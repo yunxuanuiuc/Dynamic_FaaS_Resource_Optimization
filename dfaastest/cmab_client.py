@@ -12,7 +12,7 @@ class CmabClient(object):
         "Event": {
             "S3": {
                 "bucket": "dfaastest-cmab-agent",
-                "key": "hao_factorial_1117_with_feature_round3_test_rec_table.model"
+                "key": None,  # this gets updated by the worker based on the function name and the experiment
             },
             "action": None,
             "Request": {
@@ -31,7 +31,7 @@ class CmabClient(object):
                 "features": [
                     "bytes"
                 ],
-                "model_name": "yunxuan_factorial_1117_no_feature_round2_inverse1"
+                "model_name": None,  # this gets updated by the worker based on the function name and the experiment
             }
         }
     }

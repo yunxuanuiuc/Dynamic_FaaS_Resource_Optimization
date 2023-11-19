@@ -62,11 +62,13 @@ class Benchmarker(object):
             load_generator_thread = Process(target=self.start_load_generator, args=())
             load_generator_thread.start()
 
-            # after this join the worker thread will continue executing indefinitely
-            # but we won't care, we'll just let it run and it will be killed when the process exits
+            # make sure the load generator completes
+            # despite this join the worker will continue executing
             load_generator_thread.join()
 
             time.sleep(60)  # wait for any worker threads to finish processing records
+
+            # terminate the worker :'(
             worker_thread.terminate()
 
 
