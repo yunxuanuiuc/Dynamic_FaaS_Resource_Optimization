@@ -1,6 +1,7 @@
 load_generator:
   debug: True
   duration: 30                # number of seconds for the run
+  mode: 'async'               # 'sync' | 'async' - For synchronous or asynchronous requests mode.
   wait_periods:
     - wait: 0.1           # in seconds
       duration: 5
