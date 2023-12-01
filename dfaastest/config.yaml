@@ -66,6 +66,12 @@ cmab_agent:
   api_stage: 'test'
   model_funk:  # passed in at runtime from the operator
   model_experiment:  # passed in at runtime from the operator
+  optimization_goal: 'slo'  # slo | duration
+  slo:
+    array_summation_1: 592
+    big_data_processing_1: 3682
+    factorial_1: 339
+    grayscale_conversion_1: 2495
 
 operator:
   wait_period: 30 # seconds

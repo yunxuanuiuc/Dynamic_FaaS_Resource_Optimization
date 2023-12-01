@@ -70,6 +70,8 @@ class CmabClient(object):
 
         self.model_funk = self.cmab_config['model_funk']
         self.model_experiment = self.cmab_config['model_experiment']
+        self.optimization_goal = self.cmab_config['optimization_goal']
+        self.slo = self.cmab_config['slo']
 
         self.model_name = f"{self.model_funk}_{self.model_experiment}"
         self.request_templates['Event']['S3']['key'] = f"{self.model_name}.model"
@@ -110,7 +112,17 @@ class CmabClient(object):
         request_payload = deepcopy(self.request_observe_templates)
         request_payload["Event"]["Request"]["memory"] = payload["memory_size"]
         request_payload["Event"]["Request"]["probability"] = self.probability_dict[payload["memory_size"]]
-        request_payload["Event"]["Request"]["cost"] = 1000/int(payload["billed_duration"]) # 300*1/time
+
+        match self.optimization_goal:
+            case 'billed_duration':
+                request_payload["Event"]["Request"]["cost"] = 1000/int(payload["billed_duration"])  # 300*1/time
+            case 'slo':
+                cost = int(payload["billed_duration"])
+                slo = self.slo[self.model_funk]
+                if cost > slo:
+                    cost = 99999999999  # penalization
+                request_payload["Event"]["Request"]["cost"] = cost
+
         request_payload["Event"]["Request"]["bytes"] = payload["payload_size"]
 
         print(f'send_observe - request_payload: {request_payload}')
