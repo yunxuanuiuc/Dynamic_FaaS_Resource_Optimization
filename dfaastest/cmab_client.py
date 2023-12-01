@@ -120,7 +120,9 @@ class CmabClient(object):
                 cost = int(payload["billed_duration"])
                 slo = self.slo[self.model_funk]
                 if cost > slo:
-                    cost = 99999999999  # penalization
+                    cost = 1/cost  # penalization
+                else:
+                    cost = slo - cost
                 request_payload["Event"]["Request"]["cost"] = cost
 
         request_payload["Event"]["Request"]["bytes"] = payload["payload_size"]
