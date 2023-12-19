@@ -1,0 +1,769 @@
+@INPROCEEDINGS{9860980,
+  author={Safaryan, Gor and Jindal, Anshul and Chadha, Mohak and Gerndt, Michael},
+  booktitle={2022 IEEE 15th International Conference on Cloud Computing (CLOUD)}, 
+  title={SLAM: SLO-Aware Memory Optimization for Serverless Applications}, 
+  year={2022},
+  volume={},
+  number={},
+  pages={30-39},
+  abstract={Serverless computing paradigm has become more ingrained into the industry, as it offers a cheap alternative for application development and deployment. This new paradigm has also created new kinds of problems for the developer, who needs to tune memory configurations for balancing cost and performance. Many researchers have addressed the issue of minimizing cost and meeting Service Level Objective (SLO) requirements for a single FaaS function, but there has been a gap for solving the same problem for an application consisting of many FaaS functions, creating complex application workflows.In this work, we designed a tool called SLAM to address the issue. SLAM uses distributed tracing to detect the relationship among the FaaS functions within a serverless application. By modeling each of them, it estimates the execution time for the application at different memory configurations. Using these estimations, SLAM determines the optimal memory configuration for the given serverless application based on the specified SLO requirements and user-specified objectives (minimum cost or minimum execution time). We demonstrate the functionality of SLAM on AWS Lambda by testing on four applications. Our results show that the suggested memory configurations guarantee that more than 95% of requests are completed within the predefined SLOs.},
+  keywords={},
+  doi={10.1109/CLOUD55607.2022.00019},
+  ISSN={2159-6190},
+  month={July},}
+
+@INPROCEEDINGS{9155363,
+  author={Akhtar, Nabeel and Raza, Ali and Ishakian, Vatche and Matta, Ibrahim},
+  booktitle={IEEE INFOCOM 2020 - IEEE Conference on Computer Communications}, 
+  title={COSE: Configuring Serverless Functions using Statistical Learning}, 
+  year={2020},
+  volume={},
+  number={},
+  pages={129-138},
+  abstract={Serverless computing has emerged as a new compelling paradigm for the deployment of applications and services. It represents an evolution of cloud computing with a simplified programming model, that aims to abstract away most operational concerns. Running serverless functions requires users to configure multiple parameters, such as memory, CPU, cloud provider, etc. While relatively simpler, configuring such parameters correctly while minimizing cost and meeting delay constraints is not trivial. In this paper, we present COSE, a framework that uses Bayesian Optimization to find the optimal configuration for serverless functions. COSE uses statistical learning techniques to intelligently collect samples and predict the cost and execution time of a serverless function across unseen configuration values. Our framework uses the predicted cost and execution time, to select the "best" configuration parameters for running a single or a chain of functions, while satisfying customer objectives. In addition, COSE has the ability to adapt to changes in the execution time of a serverless function. We evaluate COSE not only on a commercial cloud provider, where we successfully found optimal/near-optimal configurations in as few as five samples, but also over a wide range of simulated distributed cloud environments that confirm the efficacy of our approach.},
+  keywords={},
+  doi={10.1109/INFOCOM41043.2020.9155363},
+  ISSN={2641-9874},
+  month={July},}
+
+
+@ARTICLE{10063937,
+  author={Raza, Ali and Akhtar, Nabeel and Isahagian, Vatche and Matta, Ibrahim and Huang, Lei},
+  journal={IEEE Transactions on Network and Service Management}, 
+  title={Configuration and Placement of Serverless Applications Using Statistical Learning}, 
+  year={2023},
+  volume={20},
+  number={2},
+  pages={1065-1077},
+  abstract={In the last decade, serverless computing emerged as a new compelling paradigm for the deployment of cloud applications and services. It represents an evolution of cloud computing with a simplified programming model, that aims to abstract away most operational concerns. Running serverless applications requires users to configure multiple parameters, such as memory, CPU, cloud provider, etc. While relatively simpler, configuring such parameters correctly while minimizing cost and meeting delay constraints is not trivial. In this paper, we present COSE, a framework that uses Bayesian Optimization to find the optimal resource configuration and placement for functions in a serverless application. COSE uses statistical learning techniques to intelligently collect samples and predict the cost and execution time of a serverless function across unseen configuration values. Our framework uses the predicted cost and execution time on available locations to select the “best” configuration parameters and placement for running a serverless application while satisfying customer objectives. We evaluate COSE on AWS Lambda with real-world applications consisting of multiple functions (both linear chains and service graphs), where we successfully found optimal/near-optimal configurations. We also evaluate COSE over a wide range of simulated distributed cloud environments that confirm the efficacy of our approach.},
+  keywords={},
+  doi={10.1109/TNSM.2023.3254437},
+  ISSN={1932-4537},
+  month={June},}
+
+
+@inproceedings{10.1145/3542929.3563469,
+author = {Wang, Ziliang and Zhu, Shiyi and Li, Jianguo and Jiang, Wei and Ramakrishnan, K. K. and Zheng, Yangfei and Yan, Meng and Zhang, Xiaohong and Liu, Alex X.},
+title = {DeepScaling: Microservices Autoscaling for Stable CPU Utilization in Large Scale Cloud Systems},
+year = {2022},
+isbn = {9781450394147},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi-org.proxy2.library.illinois.edu/10.1145/3542929.3563469},
+doi = {10.1145/3542929.3563469},
+abstract = {Cloud service providers conservatively provision excessive resources to ensure service level objectives (SLOs) are met. They often set lower CPU utilization targets to ensure service quality is not degraded, even when the workload varies significantly. Not only does this potentially waste resources, but it can also consume excessive power in large-scale cloud deployments. This paper aims to minimize resource costs while ensuring SLO requirements are met in a dynamically varying, large-scale production microservice environment. We propose DeepScaling, which introduces three innovative components to adaptively refine the target CPU utilization to a level that is maintained at a stable value to meet SLO constraints while using minimum resources. First, DeepScaling forecasts the workload for each service using a Spatio-temporal Graph Neural Network. Second, DeepScaling estimates the CPU utilization by mapping the workload intensity to an estimated CPU utilization with a Deep Neural Network, while taking into account multiple factors in the cloud environment (e.g., periodic tasks and traffic). Third, DeepScaling generates an autoscaling policy for each service based on an improved Deep Q Network (DQN). The adaptive autoscaling policy updates the target CPU utilization to be a maximum, stable value, while ensuring SLOs is not violated. We compare DeepScaling with state-of-the-art autoscaling approaches in the large-scale production cloud environment of the Ant Group. It shows that DeepScaling outperforms other approaches both in terms of maintaining stable service performance, and saving resources, by a significant margin. The deployment of DeepScaling in Ant Group's real production environment with 135 microservices saves the provisioning of over 30,000 CPU cores per day, on average.},
+booktitle = {Proceedings of the 13th Symposium on Cloud Computing},
+pages = {16–30},
+numpages = {15},
+location = {San Francisco, California},
+series = {SoCC '22}
+}
+
+
+@inproceedings{10.1145/3472883.3486999,
+author = {Baarzi, Ataollah Fatahi and Kesidis, George},
+title = {SHOWAR: Right-Sizing And Efficient Scheduling of Microservices},
+year = {2021},
+isbn = {9781450386388},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3472883.3486999},
+doi = {10.1145/3472883.3486999},
+abstract = {Microservices architecture have been widely adopted in designing distributed cloud applications where the application is decoupled into multiple small components (i.e. "microservices"). One of the challenges in deploying microservices is finding the optimal amount of resources (i.e. size) and the number of instances (i.e. replicas) for each microservice in order to maintain a good performance as well as prevent resource wastage and under-utilization which is not cost-effective. This paper presents SHOWAR, a framework that configures the resources by determining the number of replicas (horizontal scaling) and the amount of CPU and Memory for each microservice (vertical scaling). For vertical scaling, SHOWAR uses empirical variance in the historical resource usage to find the optimal size and mitigate resource wastage. For horizontal scaling, SHOWAR uses basic ideas from control theory along with kernel level performance metrics. Additionally, once the size for each microservice is found, SHOWAR bridges the gap between optimal resource allocation and scheduling by generating affinity rules (i.e. hints) for the scheduler to further improve the performance. Our experiments, using a variety of microservice applications and real-world workloads, show that, compared to the state-of-the-art autoscaling and scheduling systems, SHOWAR on average improves the resource allocation by up to 22\% while improving the 99th percentile end-to-end user request latency by 20\%.},
+booktitle = {Proceedings of the ACM Symposium on Cloud Computing},
+pages = {427–441},
+numpages = {15},
+keywords = {autoscaling, microservices, cloud computing},
+location = {Seattle, WA, USA},
+series = {SoCC '21}
+}
+
+
+
+@inproceedings{10.1145/3472883.3486992,
+author = {Bhasi, Vivek M. and Gunasekaran, Jashwant Raj and Thinakaran, Prashanth and Mishra, Cyan Subhra and Kandemir, Mahmut Taylan and Das, Chita},
+title = {Kraken: Adaptive Container Provisioning for Deploying Dynamic DAGs in Serverless Platforms},
+year = {2021},
+isbn = {9781450386388},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi-org.proxy2.library.illinois.edu/10.1145/3472883.3486992},
+doi = {10.1145/3472883.3486992},
+abstract = {The growing popularity of microservices has led to the proliferation of online cloud service-based applications, which are typically modelled as Directed Acyclic Graphs (DAGs) comprising of tens to hundreds of microservices. The vast majority of these applications are user-facing, and hence, have stringent SLO requirements. Serverless functions, having short resource provisioning times and instant scalability, are suitable candidates for developing such latency-critical applications. However, existing serverless providers are unaware of the workflow characteristics of application DAGs, leading to container over-provisioning in many cases. This is further exacerbated in the case of dynamic DAGs, where the function chain for an application is not known a priori. Motivated by these observations, we propose Kraken, a workflow-aware resource management framework that minimizes the number of containers provisioned for an application DAG while ensuring SLO-compliance. We design and implement Kraken on OpenFaaS and evaluate it on a multi-node Kubernetes-managed cluster. Our extensive experimental evaluation using DeathStarbench workload suite and real-world traces demonstrates that Kraken spawns up to 76\% fewer containers, thereby improving container utilization and saving cluster-wide energy by up to 4x and 48\%, respectively, when compared to state-of-the art schedulers employed in serverless platforms.},
+booktitle = {Proceedings of the ACM Symposium on Cloud Computing},
+pages = {153–167},
+numpages = {15},
+keywords = {scheduling, serverless, queuing, resource-management},
+location = {Seattle, WA, USA},
+series = {SoCC '21}
+}
+
+
+
+@inproceedings{10.1145/3542929.3563468,
+author = {Kaffes, Kostis and Yadwadkar, Neeraja J. and Kozyrakis, Christos},
+title = {Hermod: Principled and Practical Scheduling for Serverless Functions},
+year = {2022},
+isbn = {9781450394147},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi-org.proxy2.library.illinois.edu/10.1145/3542929.3563468},
+doi = {10.1145/3542929.3563468},
+abstract = {Serverless computing has seen rapid growth due to the ease-of-use and cost-efficiency it provides. However, function scheduling, a critical component of serverless systems, has been overlooked. In this paper, we take a fist-principles approach toward designing a scheduler that caters to the unique characteristics of serverless functions as seen in real-world deployments. We first create a taxonomy of scheduling policies along three dimensions. Next, we use simulation to explore the scheduling policy space and show that frequently used features such as late binding and random load balancing are sub-optimal for common execution time distributions and load ranges. We use these insights to design Hermod, a scheduler for serverless functions with two key characteristics. First, to avoid head-of-line blocking due to high function execution time variability, Hermod uses a combination of early binding and processor sharing for scheduling at individual worker machines. Second, Hermod is cost, load, and locality-aware. It improves consolidation at low load, it employs least-loaded balancing at high load to retain high performance, and it reduces the number of cold starts compared to pure load-based policies. We implement Hermod for Apache OpenWhisk and demonstrate that, for the case of the function patterns observed in real-world traces, it achieves up to 85\% lower function slowdown and 60\% higher throughput compared to existing production and state-of-the-art research schedulers.},
+booktitle = {Proceedings of the 13th Symposium on Cloud Computing},
+pages = {289–305},
+numpages = {17},
+keywords = {serverless, cloud computing, scheduling},
+location = {San Francisco, California},
+series = {SoCC '22}
+}
+
+
+@inproceedings{10.1145/3464298.3493398,
+author = {Eismann, Simon and Bui, Long and Grohmann, Johannes and Abad, Cristina and Herbst, Nikolas and Kounev, Samuel},
+title = {Sizeless: Predicting the Optimal Size of Serverless Functions},
+year = {2021},
+isbn = {9781450385343},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi-org.proxy2.library.illinois.edu/10.1145/3464298.3493398},
+doi = {10.1145/3464298.3493398},
+abstract = {Serverless functions are an emerging cloud computing paradigm that is being rapidly adopted by both industry and academia. In this cloud computing model, the provider opaquely handles resource management tasks such as resource provisioning, deployment, and auto-scaling. The only resource management task that developers are still in charge of is selecting how much resources are allocated to each worker instance. However, selecting the optimal size of serverless functions is quite challenging, so developers often neglect it despite its significant cost and performance benefits. Existing approaches aiming to automate serverless functions resource sizing require dedicated performance tests, which are time-consuming to implement and maintain.In this paper, we introduce an approach to predict the optimal resource size of a serverless function using monitoring data from a single resource size. As our approach does not require dedicated performance tests, it enables cloud providers to implement resource sizing on a platform level and automate the last resource management task associated with serverless functions. We evaluate our approach on four different serverless applications on AWS, where it predicts the execution time of the other memory sizes based on monitoring data for a single memory size with an average prediction error of 15.3\%. Based on these predictions, it selects the optimal memory size for 79.0\% of the serverless functions and the second-best memory size for 12.3\% of the serverless functions, which results in an average speedup of 39.7\% while also decreasing average costs by 2.6\%.},
+booktitle = {Proceedings of the 22nd International Middleware Conference},
+pages = {248–259},
+numpages = {12},
+location = {Qu\'{e}bec city, Canada},
+series = {Middleware '21}
+}
+
+
+@inproceedings{10.5555/3154630.3154669,
+author = {Alipourfard, Omid and Liu, Hongqiang Harry and Chen, Jianshu and Venkataraman, Shivaram and Yu, Minlan and Zhang, Ming},
+title = {Cherrypick: Adaptively Unearthing the Best Cloud Configurations for Big Data Analytics},
+year = {2017},
+isbn = {9781931971379},
+publisher = {USENIX Association},
+address = {USA},
+abstract = {Picking the right cloud configuration for recurring big data analytics jobs running in clouds is hard, because there can be tens of possible VM instance types and even more cluster sizes to pick from. Choosing poorly can significantly degrade performance and increase the cost to run a job by 2-3x on average, and as much as 12x in the worst-case. However, it is challenging to automatically identify the best configuration for a broad spectrum of applications and cloud configurations with low search cost. CherryPick is a system that leverages Bayesian Optimization to build performance models for various applications, and the models are just accurate enough to distinguish the best or close-to-the-best configuration from the rest with only a few test runs. Our experiments on five analytic applications in AWS EC2 show that CherryPick has a 45-90\% chance to find optimal configurations, otherwise near-optimal, saving up to 75\% search cost compared to existing solutions.},
+booktitle = {Proceedings of the 14th USENIX Conference on Networked Systems Design and Implementation},
+pages = {469–482},
+numpages = {14},
+location = {Boston, MA, USA},
+series = {NSDI'17}
+}
+
+
+@INPROCEEDINGS{9251165,
+  author={Cordingly, Robert and Shu, Wen and Lloyd, Wes J.},
+  booktitle={2020 IEEE Intl Conf on Dependable, Autonomic and Secure Computing, Intl Conf on Pervasive Intelligence and Computing, Intl Conf on Cloud and Big Data Computing, Intl Conf on Cyber Science and Technology Congress (DASC/PiCom/CBDCom/CyberSciTech)}, 
+  title={Predicting Performance and Cost of Serverless Computing Functions with SAAF}, 
+  year={2020},
+  volume={},
+  number={},
+  pages={640-649},
+  doi={10.1109/DASC-PICom-CBDCom-CyberSciTech49142.2020.00111}
+}
+
+
+@INPROCEEDINGS{9460548,
+  author={Jarachanthan, Jananie and Chen, Li and Xu, Fei and Li, Bo},
+  booktitle={2021 IEEE International Parallel and Distributed Processing Symposium (IPDPS)}, 
+  title={Astra: Autonomous Serverless Analytics with Cost-Efficiency and QoS-Awareness}, 
+  year={2021},
+  volume={},
+  number={},
+  pages={756-765},
+  abstract={With the ability to simplify the code deployment with one-click upload and lightweight execution, serverless computing has emerged as a promising paradigm with increasing popularity. However, there remain open challenges when adapting data-intensive analytics applications to the serverless context, in which users of serverless analytics encounter with the difficulty in coordinating computation across different stages and provisioning resources in a large configuration space. This paper presents our design and implementation of Astra, which configures and orchestrates serverless analytics jobs in an autonomous manner, while taking into account flexibly-specified user requirements. Astra relies on the modeling of performance and cost which characterizes the intricate interplay among multi-dimensional factors (e.g., function memory size, degree of parallelism at each stage). We formulate an optimization problem based on user-specific requirements towards performance enhancement or cost reduction, and develop a set of algorithms based on graph theory to obtain optimal job execution. We deploy Astra in the AWS Lambda platform and conduct real-world experiments over three representative benchmarks with different scales. Results demonstrate that Astra can achieve the optimal execution decision for serverless analytics, by improving the performance of 21% to 60% under a given budget constraint, and resulting in a cost reduction of 20% to 80% without violating performance requirement, when compared with three baseline configuration algorithms.},
+  keywords={},
+  doi={10.1109/IPDPS49936.2021.00085},
+  ISSN={1530-2075},
+  month={May},}
+
+
+@inproceedings{10.1109/INFOCOM48880.2022.9796962,
+author = {Wen, Zhaojie and Wang, Yishuo and Liu, Fangming},
+title = {StepConf: SLO-Aware Dynamic Resource Configuration for Serverless Function Workflows},
+year = {2022},
+publisher = {IEEE Press},
+url = {https://doi.org/10.1109/INFOCOM48880.2022.9796962},
+doi = {10.1109/INFOCOM48880.2022.9796962},
+abstract = {Function-as-a-Service (FaaS) offers a fine-grained resource provision model, enabling developers to build highly elastic cloud applications. User requests are handled by a series of serverless functions step by step, which forms a function-based workflow. The developers are required to set proper resource configuration for functions, so as to meet service level objectives (SLOs) and save cost. However, developing the resource configuration strategy is challenging. It is mainly because execution of cloud functions often suffers from cold start and performance fluctuation, which requires a dynamic configuration strategy to guarantee the SLOs. In this paper, we present StepConf, a framework that automates the resource configuration for functions as the workflow runs. StepConf optimizes memory size for each function step in the workflow and takes inter and intra-function parallelism into consideration. We evaluate StepConf on AWS Lambda. Compared with baselines, the experimental results show that StepConf can save cost up to 40.9\% while ensuring the SLOs.},
+booktitle = {IEEE INFOCOM 2022 - IEEE Conference on Computer Communications},
+pages = {1868–1877},
+numpages = {10},
+location = {London, United Kingdom}
+}
+
+
+
+@inproceedings{10.1145/3542929.3563464,
+author = {Bhasi, Vivek M. and Gunasekaran, Jashwant Raj and Sharma, Aakash and Kandemir, Mahmut Taylan and Das, Chita},
+title = {Cypress: Input Size-Sensitive Container Provisioning and Request Scheduling for Serverless Platforms},
+year = {2022},
+isbn = {9781450394147},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi-org.proxy2.library.illinois.edu/10.1145/3542929.3563464},
+doi = {10.1145/3542929.3563464},
+abstract = {The growing popularity of the serverless platform has seen an increase in the number and variety of applications (apps) being deployed on it. The majority of these apps process user-provided input to produce the desired results. Existing work in the area of input-sensitive profiling has empirically shown that many such apps have input size-dependent execution times which can be determined through modelling techniques. Nevertheless, existing serverless resource management frameworks are agnostic to the input size-sensitive nature of these apps. We demonstrate in this paper that this can potentially lead to container over-provisioning and/or end-to-end Service Level Objective (SLO) violations. To address this, we propose Cypress, an input size-sensitive resource management framework, that minimizes the containers provisioned for apps, while ensuring a high degree of SLO compliance. We perform an extensive evaluation of Cypress on top of a Kubernetes-managed cluster using 5 apps from the AWS Serverless Application Repository and/or Open-FaaS Function Store with real-world traces and varied input size distributions. Our experimental results show that Cypress spawns up to 66\% fewer containers, thereby, improving container utilization and saving cluster-wide energy by up to 2.95X and 23\%, respectively, versus state-of-the-art frameworks, while remaining highly SLO-compliant (up to 99.99\%).},
+booktitle = {Proceedings of the 13th Symposium on Cloud Computing},
+pages = {257–272},
+numpages = {16},
+keywords = {resource-management, scheduling, serverless, input size},
+location = {San Francisco, California},
+series = {SoCC '22}
+}
+
+@misc{aws-lambda,
+    key = {AWS Lambda},
+    title = {AWS Lambda Product.},
+    note = {\url{https://aws.amazon.com/lambda/}, Accessed: 2023-09-16}
+}
+
+@misc{vowpal-wabbit,
+    key = {Vowpal Wabbit},
+    title = {Vowpal Wabbit},
+    note = {\url{https://vowpalwabbit.org/index.html/},
+    Accessed: 2023-10-27}
+}
+
+@inproceedings{10.1145/3429880.3430094,
+author = {Spillner, Josef},
+title = {Resource Management for Cloud Functions with Memory Tracing, Profiling and Autotuning},
+year = {2021},
+isbn = {9781450382045},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi-org.proxy2.library.illinois.edu/10.1145/3429880.3430094},
+doi = {10.1145/3429880.3430094},
+abstract = {Application software provisioning evolved from monolithic designs towards differently designed abstractions including serverless applications. The promise of that abstraction is that developers are free from infrastructural concerns such as instance activation and autoscaling. Today's serverless architectures based on FaaS are however still exposing developers to explicit low-level decisions about the amount of memory to allocate for the respective cloud functions. In many cases, guesswork and ad-hoc decisions determine the values a developer will put into the configuration. We contribute tools to measure the memory consumption of a function in various Docker, OpenFaaS and GCF/GCR configurations over time and to create trace profiles that advanced FaaS engines can use to autotune memory dynamically. Moreover, we explain how pricing forecasts can be performed by connecting these traces with a FaaS characteristics knowledge base.},
+booktitle = {Proceedings of the 2020 Sixth International Workshop on Serverless Computing},
+pages = {13–18},
+numpages = {6},
+keywords = {models, serverless computing, vertical scaling},
+location = {Delft, Netherlands},
+series = {WoSC'20}
+}
+
+@ARTICLE{9756233,
+  author={Li, Yongkang and Lin, Yanying and Wang, Yang and Ye, Kejiang and Xu, Chengzhong},
+  journal={IEEE Transactions on Services Computing}, 
+  title={Serverless Computing: State-of-the-Art, Challenges and Opportunities}, 
+  year={2023},
+  volume={16},
+  number={2},
+  pages={1522-1539},
+  abstract={Serverless computing is growing in popularity by virtue of its lightweight and simplicity of management. It achieves these merits by reducing the granularity of the computing unit to the function level. Specifically, serverless allows users to focus squarely on the function itself while leaving other cumbersome management and scheduling issues to the platform provider, who is responsible for striking a balance between high-performance scheduling and low resource cost. In this article, we conduct a comprehensive survey of serverless computing with a particular focus on its infrastructure characteristics. Whereby some existing challenges are identified, and the associated cutting-edge solutions are analyzed. With these results, we further investigate some typical open-source frameworks and study how they address the identified challenges. Given the great advantages of serverless computing, it is expected that its deployment would dominate future cloud platforms. As such, we also envision some promising research opportunities that need to be further explored in the future. We hope that our work in this article can inspire those researchers and practitioners who are engaged in related fields to appreciate serverless computing, thereby setting foot in this promising area and making great contributions to its development.},
+  keywords={},
+  doi={10.1109/TSC.2022.3166553},
+  ISSN={1939-1374},
+  month={March},}
+
+
+
+@INPROCEEDINGS{9582177,
+  author={Manner, Johannes and Endreβ, Martin and Böhm, Sebastian and Wirtz, Guido},
+  booktitle={2021 IEEE 14th International Conference on Cloud Computing (CLOUD)}, 
+  title={Optimizing Cloud Function Configuration via Local Simulations}, 
+  year={2021},
+  volume={},
+  number={},
+  pages={168-178},
+  abstract={Function as a Service (FaaS) - the reason why so many practitioners and researchers talk about Serverless Computing - claims to hide all operational concerns. The promise when using FaaS is that users only have to focus on the core business functionality in form of cloud functions. However, a few configuration options remain within the developer's responsibility. Most of the currently available cloud function offerings force the user to choose a memory or other resource setting and a timeout value. CPU is scaled based on the chosen options. At a first glance, this seems like an easy task, but the tradeoff between performance and cost has implications on the quality of service of a cloud function. Therefore, in this paper we present a local simulation approach for cloud functions and support developers in choosing a suitable configuration. The methodology we propose simulates the execution behavior of cloud functions locally, makes the cloud and local environment comparable and maps the local profiling data to a cloud platform. This reduces time during the development and enables developers to work with their familiar tools. This is especially helpful when implementing multi-threaded cloud functions.},
+  keywords={},
+  doi={10.1109/CLOUD53861.2021.00030},
+  ISSN={2159-6190},
+  month={Sep.},}
+
+
+
+@inproceedings {234998,
+author = {Chengliang Zhang and Minchen Yu and Wei Wang and Feng Yan},
+title = {{MArk}: Exploiting Cloud Services for {Cost-Effective}, {SLO-Aware} Machine Learning Inference Serving},
+booktitle = {2019 USENIX Annual Technical Conference (USENIX ATC 19)},
+year = {2019},
+isbn = {978-1-939133-03-8},
+address = {Renton, WA},
+pages = {1049--1062},
+url = {https://www.usenix.org/conference/atc19/presentation/zhang-chengliang},
+publisher = {USENIX Association},
+month = jul
+}
+
+
+
+@article{10.5555/3546258.3546391,
+author = {Bietti, Alberto and Agarwal, Alekh and Langford, John},
+title = {A Contextual Bandit Bake-Off},
+year = {2021},
+issue_date = {January 2021},
+publisher = {JMLR.org},
+volume = {22},
+number = {1},
+issn = {1532-4435},
+abstract = {Contextual bandit algorithms are essential for solving many real-world interactive machine learning problems. Despite multiple recent successes on statistically optimal and computationally efficient methods, the practical behavior of these algorithms is still poorly understood. We leverage the availability of large numbers of supervised learning datasets to empirically evaluate contextual bandit algorithms, focusing on practical methods that learn by relying on optimization oracles from supervised learning. We find that a recent method (Foster et al., 2018) using optimism under uncertainty works the best overall. A surprisingly close second is a simple greedy baseline that only explores implicitly through the diversity of contexts, followed by a variant of Online Cover (Agarwal et al., 2014) which tends to be more conservative but robust to problem specification by design. Along the way, we also evaluate various components of contextual bandit algorithm design such as loss estimators. Overall, this is a thorough study and review of contextual bandit methodology.},
+journal = {J. Mach. Learn. Res.},
+month = {jan},
+articleno = {133},
+numpages = {49},
+keywords = {online learning, evaluation, contextual bandits}
+}
+
+
+
+@InProceedings{10.1007/978-3-031-04718-3_9,
+author="Zubko, Tetiana
+and Jindal, Anshul
+and Chadha, Mohak
+and Gerndt, Michael",
+editor="Montesi, Fabrizio
+and Papadopoulos, George Angelos
+and Zimmermann, Wolf",
+title="MAFF: Self-adaptive Memory Optimization for Serverless Functions",
+booktitle="Service-Oriented and Cloud Computing",
+year="2022",
+publisher="Springer International Publishing",
+address="Cham",
+pages="137--154",
+abstract="Function-as-a-Service (FaaS), a key enabler of serverless computing, has been proliferating, as it offers a cheap alternative for application development and deployment. However, while offering many advantages, FaaS also poses new challenges. In particular, most commercial FaaS providers still require users to manually configure the memory allocated to the FaaS functions based on their experience and knowledge. This often leads to suboptimal function performance and higher execution costs. In this paper, we present a framework called MAFF that automatically finds the optimal memory configurations for the FaaS functions based on two optimization objectives: cost-only and balanced (balance between cost and execution duration). Furthermore, MAFF self-adapts the memory configurations for the FaaS functions based on the changing function inputs or other requirements, such as an increase in the number of requests. Moreover, we propose and implement different optimization algorithms for different objectives. We demonstrate the functionality of MAFF on AWS Lambda by testing on four different categories of FaaS functions. Our results show that the suggested memory configurations with the Linear algorithm achieve 90{\%} accuracy with a speedup of 2x compared to the other algorithms. Finally, we compare MAFF with two popular memory optimization tools provided by AWS, i.e., AWS Compute Optimizer and AWS Lambda Power Tuning, and demonstrate how our framework overcomes their limitations.",
+isbn="978-3-031-04718-3"
+}
+
+
+@article{kumari2022resource,
+  title={Resource optimization in performance modeling for serverless application},
+  author={Kumari, Anisha and Patra, Manoj Kumar and Sahoo, Bibhudatta and Behera, Ranjan Kumar},
+  journal={International Journal of Information Technology},
+  volume={14},
+  number={6},
+  pages={2867--2875},
+  year={2022},
+  publisher={Springer}
+}
+
+
+@INPROCEEDINGS{9860370,
+  author={Manner, Johannes and Wirtz, Guido},
+  booktitle={2022 IEEE 15th International Conference on Cloud Computing (CLOUD)}, 
+  title={Resource Scaling Strategies for Open-Source FaaS Platforms compared to Commercial Cloud Offerings}, 
+  year={2022},
+  volume={},
+  number={},
+  pages={40-48},
+  abstract={Open-source offerings are often investigated when comparing their features to commercial cloud offerings. However, performance benchmarking is rarely executed for open-source tools hosted on-premise nor is it possible to conduct a fair cost comparison due to a lack of resource settings equivalent to cloud scaling strategies.Therefore, we firstly list implemented resource scaling strategies for public and open-source FaaS platforms. Based on this we propose a methodology to calculate an abstract performance measure to compare two platforms with each other. Since all open-source platforms suggest a Kubernetes deployment, we use this measure for a configuration of open-source FaaS platforms based on Kubernetes limits. We tested our approach with CPU intensive functions, considering the difference between single-threaded and multi-threaded functions to avoid wasting resources. With regard to this, we also address the noisy neighbor problem for open-source FaaS platforms by conducting an instance parallelization experiment. Our approach to limit resources leads to consistent results while avoiding an overbooking of resources.},
+  keywords={},
+  doi={10.1109/CLOUD55607.2022.00020},
+  ISSN={2159-6190},
+  month={July},}
+
+
+@INPROCEEDINGS{9582234,
+  author={Chadha, Mohak and Jindal, Anshul and Gerndt, Michael},
+  booktitle={2021 IEEE 14th International Conference on Cloud Computing (CLOUD)}, 
+  title={Architecture-Specific Performance Optimization of Compute-Intensive FaaS Functions}, 
+  year={2021},
+  volume={},
+  number={},
+  pages={478-483},
+  abstract={FaaS allows an application to be decomposed into functions that are executed on a FaaS platform. The FaaS platform is responsible for the resource provisioning of the functions. Recently, there is a growing trend towards the execution of compute-intensive FaaS functions that run for several seconds. However, due to the billing policies followed by commercial FaaS offerings, the execution of these functions can incur significantly higher costs. Moreover, due to the abstraction of underlying processor architectures on which the functions are executed, the performance optimization of these functions is challenging. As a result, most FaaS functions use pre-compiled libraries generic to x86-64 leading to performance degradation. In this paper, we examine the underlying processor architectures for Google Cloud Functions (GCF) and determine their prevalence across the 19 available GCF regions. We modify, adapt, and optimize three compute-intensive FaaS workloads written in Python using Numba, a JIT compiler based on LLVM, and present results wrt performance, memory consumption, and costs on GCF. Results from our experiments show that the optimization of FaaS functions can improve performance by 12.8x (geometric mean) and save costs by 73.4% on average for the three functions. Our results show that optimization of the FaaS functions for the specific architecture is very important. We achieved a maximum speedup of 1.79x by tuning the function especially for the instruction set of the underlying processor architecture.},
+  keywords={},
+  doi={10.1109/CLOUD53861.2021.00062},
+  ISSN={2159-6190},
+  month={Sep.},}
+
+
+
+@article{10.1145/3406011,
+author = {Schleier-Smith, Johann and Sreekanti, Vikram and Khandelwal, Anurag and Carreira, Joao and Yadwadkar, Neeraja J. and Popa, Raluca Ada and Gonzalez, Joseph E. and Stoica, Ion and Patterson, David A.},
+title = {What Serverless Computing is and Should Become: The next Phase of Cloud Computing},
+year = {2021},
+issue_date = {May 2021},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {64},
+number = {5},
+issn = {0001-0782},
+url = {https://doi.org/10.1145/3406011},
+doi = {10.1145/3406011},
+abstract = {The evolution that serverless computing represents, the economic forces that shape it, why it could fail, and how it might fulfill its potential.},
+journal = {Commun. ACM},
+month = {apr},
+pages = {76–84},
+numpages = {9}
+}
+
+
+
+
+@article{10.1145/3587249,
+author = {Kounev, Samuel and Herbst, Nikolas and Abad, Cristina L. and Iosup, Alexandru and Foster, Ian and Shenoy, Prashant and Rana, Omer and Chien, Andrew A.},
+title = {Serverless Computing: What It Is, and What It Is Not?},
+year = {2023},
+issue_date = {September 2023},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {66},
+number = {9},
+issn = {0001-0782},
+url = {https://doi-org.proxy2.library.illinois.edu/10.1145/3587249},
+doi = {10.1145/3587249},
+abstract = {Dispelling the confusion around serverless computing by capturing its essential and conceptual characteristics.},
+journal = {Commun. ACM},
+month = {aug},
+pages = {80–92},
+numpages = {13}
+}
+
+
+
+
+@inproceedings{10.1145/3492323.3495628,
+author = {Jindal, Anshul and Chadha, Mohak and Benedict, Shajulin and Gerndt, Michael},
+title = {Estimating the Capacities of Function-as-a-Service Functions},
+year = {2022},
+isbn = {9781450391634},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi-org.proxy2.library.illinois.edu/10.1145/3492323.3495628},
+doi = {10.1145/3492323.3495628},
+abstract = {Serverless computing is a cloud computing paradigm that allows developers to focus exclusively on business logic as cloud service providers manage resource management tasks. Serverless applications follow this model, where the application is decomposed into a set of fine-grained Function-as-a-Service (FaaS) functions. However, the obscurities of the underlying system infrastructure and dependencies between FaaS functions within the application pose a challenge for estimating the performance of FaaS functions. To characterize the performance of a FaaS function that is relevant for the user, we define Function Capacity (FC) as the maximal number of concurrent invocations the function can serve in a time without violating the Service-Level Objective (SLO).The paper addresses the challenge of quantifying the FC individually for each FaaS function within a serverless application. This challenge is addressed by sandboxing a FaaS function and building its performance model. To this end, we develop FnCapacitor - an end-to-end automated Function Capacity estimation tool. We demonstrate the functioning of our tool on Google Cloud Functions (GCF) and AWS Lambda. FnCapacitor estimates the FCs on different deployment configurations (allocated memory \& maximum function instances) by conducting time-framed load tests and building various models using statistical: linear, ridge, and polynomial regression, and Deep Neural Network (DNN) methods on the acquired performance data. Our evaluation of different FaaS functions shows relatively accurate predictions with an accuracy greater than 75\% using DNN for both cloud providers.},
+booktitle = {Proceedings of the 14th IEEE/ACM International Conference on Utility and Cloud Computing Companion},
+articleno = {19},
+numpages = {8},
+keywords = {function capacity, serverless computing, function-as-a-service},
+location = {Leicester, United Kingdom},
+series = {UCC '21}
+}
+
+
+
+@InProceedings{10.1007/978-3-030-96326-2_2,
+author="Zhang, Yonghe
+and Ye, Kejiang
+and Xu, Cheng-Zhong",
+editor="Ye, Kejiang
+and Zhang, Liang-Jie",
+title="An Experimental Analysis of Function Performance with Resource Allocation on Serverless Platform",
+booktitle="Cloud Computing -- CLOUD 2021",
+year="2022",
+publisher="Springer International Publishing",
+address="Cham",
+pages="17--31",
+abstract="Serverless computing is currently receiving much attention from both academia and industry. It has a straightforward interface that abstracts the complex internal structure of cloud computing resource usage and configuration. The fine grained pay-per-use model of serverless computing can dramatically reduce the cost of using cloud computing resources for users. Thus, today more and more traditional cloud applications are moving to the serverless architecture. In serverless computing, functions executing in containers are the basic unit of scheduling. However, the impact of resource allocation on function performance in serverless platform is still not clear. It is very challenging to improve the function performance while reducing the resource costs in serverless platform. In this paper, we select several typical workloads in serverless and analyze the function performance by controlling the CPU and memory resources. Experimental results reveal the impact of resource allocation on the performance of different types of functions. We also classify the functions in serverless according to their dependence on CPU resources and memory resources.",
+isbn="978-3-030-96326-2"
+}
+
+
+@inproceedings{10.1145/3468737.3494097,
+author = {Jindal, Anshul and Frielinghaus, Julian and Chadha, Mohak and Gerndt, Michael},
+title = {Courier: Delivering Serverless Functions within Heterogeneous FaaS Deployments},
+year = {2021},
+isbn = {9781450385640},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi-org.proxy2.library.illinois.edu/10.1145/3468737.3494097},
+doi = {10.1145/3468737.3494097},
+abstract = {With the advent of serverless computing in different domains, there is a growing need for dynamic adaption to handle diverse and heterogeneous functions. However, serverless computing is currently limited to homogeneous Function-as-a-Service (FaaS) deployments or simply FaaS Deployment (FaaSD) consisting of deployments of serverless functions using a FaaS platform in a region with certain memory configurations. Extending serverless computing to support Heterogeneous FaaS Deployments (HeteroFaaSDs) consisting of multiple FaaSDs with variable configurations (FaaS platform, region, and memory) and dynamically load balancing the invocations of the functions across these FaaSDs within a HeteroFaaSD can provide an optimal way for handling such serverless functions.In this paper, we present a software system called Courier that is responsible for optimally distributing the invocations of the functions (called delivering of serverless functions) within the HeteroFaaSDs based on the execution time of the functions on the FaaSDs comprising the HeteroFaaSDs. To this end, we developed two approaches: Auto Weighted Round-Robin (AWRR) and PerFunction Auto Weighted Round-Robin (PFAWRR) that use functions execution times for delivering serverless functions within a HeteroFaaSD to reduce the overall execution time. We demonstrate and evaluate the functioning of our developed tool on three HeteroFaaSDs using three FaaS platforms: 1) on-premise Open-Whisk, 2) AWS Lambda, and 3) Google Cloud Functions (GCF). We show that Courier can improve the overall performance of the invocations of the functions within a HeteroFaaSD as compared to traditional load balancing algorithms.},
+booktitle = {Proceedings of the 14th IEEE/ACM International Conference on Utility and Cloud Computing},
+articleno = {11},
+numpages = {10},
+keywords = {function-as-a-service, functions delivery, serverless computing},
+location = {Leicester, United Kingdom},
+series = {UCC '21}
+}
+
+
+@inproceedings{10.1145/3517207.3526971,
+author = {Qiu, Haoran and Mao, Weichao and Patke, Archit and Wang, Chen and Franke, Hubertus and Kalbarczyk, Zbigniew T. and Ba\c{s}ar, Tamer and Iyer, Ravishankar K.},
+title = {Reinforcement Learning for Resource Management in Multi-Tenant Serverless Platforms},
+year = {2022},
+isbn = {9781450392549},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi-org.proxy2.library.illinois.edu/10.1145/3517207.3526971},
+doi = {10.1145/3517207.3526971},
+abstract = {Serverless Function-as-a-Service (FaaS) is an emerging cloud computing paradigm that frees application developers from infrastructure management tasks such as resource provisioning and scaling. To reduce the tail latency of functions and improve resource utilization, recent research has been focused on applying online learning algorithms such as reinforcement learning (RL) to manage resources. Compared to existing heuristics-based resource management approaches, RL-based approaches eliminate humans in the loop and avoid the painstaking generation of heuristics. In this paper, we show that the state-of-the-art single-agent RL algorithm (S-RL) suffers up to 4.6x higher function tail latency degradation on multi-tenant serverless FaaS platforms and is unable to converge during training. We then propose and implement a customized multi-agent RL algorithm based on Proximal Policy Optimization, i.e., multi-agent PPO (MA-PPO). We show that in multi-tenant environments, MA-PPO enables each agent to be trained until convergence and provides online performance comparable to S-RL in single-tenant cases with less than 10\% degradation. Besides, MA-PPO provides a 4.4x improvement in S-RL performance (in terms of function tail latency) in multi-tenant cases.},
+booktitle = {Proceedings of the 2nd European Workshop on Machine Learning and Systems},
+pages = {20–28},
+numpages = {9},
+keywords = {function-as-a-service, resource allocation, serverless computing, multi-agent, reinforcement learning},
+location = {Rennes, France},
+series = {EuroMLSys '22}
+}
+
+
+
+@inproceedings{10.1145/3429880.3430099,
+author = {Ginzburg, Samuel and Freedman, Michael J.},
+title = {Serverless Isn't Server-Less: Measuring and Exploiting Resource Variability on Cloud FaaS Platforms},
+year = {2021},
+isbn = {9781450382045},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi-org.proxy2.library.illinois.edu/10.1145/3429880.3430099},
+doi = {10.1145/3429880.3430099},
+abstract = {Serverless computing in the cloud, or functions as a service (FaaS), poses new and unique systems design challenges. Serverless offers improved programmability for customers, yet at the cost of increased design complexity for cloud providers. One such challenge is effective and consistent resource management for serverless platforms, the implications of which we explore in this paper.In this paper, we conduct one of the first detailed in situ measurement studies of performance variability in AWS Lambda. We show that the observed variations in performance are not only significant, but stable enough to exploit.We then design and evaluate an end-to-end system that takes advantage of this resource variability to exploit the FaaS consumption-based pricing model, in which functions are charged based on their fine-grain execution time rather than actual low-level resource consumption. By using both light-weight resource probing and function execution times to identify attractive servers in serverless platforms, customers of FaaS services can cause their functions to execute on better performing servers and realize a cost savings of up to 13\% in the same AWS region.},
+booktitle = {Proceedings of the 2020 Sixth International Workshop on Serverless Computing},
+pages = {43–48},
+numpages = {6},
+location = {Delft, Netherlands},
+series = {WoSC'20}
+}
+
+
+
+@INPROCEEDINGS{10181224,
+  author={Pandey, Manish and Kwon, Young Woo},
+  booktitle={2023 IEEE/ACM 23rd International Symposium on Cluster, Cloud and Internet Computing Workshops (CCGridW)}, 
+  title={Optimizing Memory Allocation in a Serverless Architecture through Function Scheduling}, 
+  year={2023},
+  volume={},
+  number={},
+  pages={275-277},
+  abstract={In a serverless architecture, a function does not fully utilize the allocated memory. Such memory over-allocation increases node utilization and wastes resources, causing cold-start and latency issues. This paper presents a fine-grained scheduling approach for a serverless architecture that aims to address the issue of over-memory allocation and improve data locality. The proposed approach estimates how much memory each function uses so that similar functions can be scheduled on the same node. As a result, it makes less use of each node and keeps the state within a single node. We evaluated our approach through the existing FaaS applications and real-world data.},
+  keywords={},
+  doi={10.1109/CCGridW59191.2023.00056},
+  ISSN={},
+  month={May},}
+
+
+
+
+@INPROCEEDINGS{10046074,
+  author={Arif, Moiz and Assogba, Kevin and Rafique, M. Mustafa},
+  booktitle={SC22: International Conference for High Performance Computing, Networking, Storage and Analysis}, 
+  title={Canary: Fault-Tolerant FaaS for Stateful Time-Sensitive Applications}, 
+  year={2022},
+  volume={},
+  number={},
+  pages={1-16},
+  abstract={Function-as-a-Service (FaaS) platforms have recently gained rapid popularity. Many stateful applications have been migrated to FaaS platforms due to their ease of deployment, scalability, and minimal management overhead. However, failures in FaaS have not been thoroughly investigated, thus making these desirable platforms unreliable for guaranteeing function execution and ensuring performance requirements. In this paper, we propose Canary, a highly resilient and fault-tolerant framework for FaaS that mitigates the impact of failures and reduces the overhead of function restart. Canary utilizes replicated container runtimes and application-level checkpoints to reduce application recovery time over FaaS platforms. Our evaluations using representative stateful FaaS applications show that Canary reduces the application recovery time and dollar cost by up to 83% and 12%, respectively over the default retry-based strategy. Moreover, it improves application availability with an additional average execution time and cost overhead of 14% and 8%, respectively, as compared to the ideal failure-free execution.},
+  keywords={},
+  doi={10.1109/SC41404.2022.00046},
+  ISSN={2167-4337},
+  month={Nov},}
+
+
+
+
+
+@inproceedings{10.1145/3545008.3545064,
+author = {Tang, Wenda and Fu, Senbo and Ke, Yutao and Peng, Qian and Gao, Feng},
+title = {Themis: Fair Memory Subsystem Resource Sharing with Differentiated QoS in Public Clouds},
+year = {2023},
+isbn = {9781450397339},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi-org.proxy2.library.illinois.edu/10.1145/3545008.3545064},
+doi = {10.1145/3545008.3545064},
+abstract = {To reduce the increasing cost of building and operating cloud data centers, cloud providers are seeking various mechanisms to achieve higher resource effectiveness. For example, cloud operators are leveraging dynamic resource management techniques to consolidate a higher density of application workloads into commodity physical servers to maximize server resource utilization. However, higher workload density is a major source of performance interference problems in multi-tenant clouds. Existing performance isolation techniques such as dedicated CPU cores for specific workloads are not enough as there are still common resource (e.g., last-level cache and memory bandwidth in memory subsystem) on the processor that are shared among all CPUs on the same NUMA node. While prior work has proposed a variety of resource partitioning techniques, it still remains unexplored to characterize the impact of memory subsystem resource partitioning for the consolidated workloads with different priorities and investigate software support to dynamically manage memory subsystem resource sharing in a real-time manner. To bridge the gap, we propose Themis, a feedback-based controller that enables a priority-aware and fairness-aware memory subsystem resource management strategy to guarantee the performance of high-priority workloads while maintaining fairness across all colocated workloads in high-density clouds. Themis is evaluated with multiple typical cloud applications in our data center environment. The results show that Themis improves the performance of various workloads by up to 3.15\%, and fairness by more than 70\% in memory subsystem resource allocation compared to existing state-of-the-art work.},
+booktitle = {Proceedings of the 51st International Conference on Parallel Processing},
+articleno = {49},
+numpages = {12},
+keywords = {resource management, priority-aware, memory bandwidth, Cloud computing, cache ways, quality of service, interference, fairness-aware},
+location = {Bordeaux, France},
+series = {ICPP '22}
+}
+
+
+
+@INPROCEEDINGS{10177446,
+  author={Wu, Hao and Deng, Junxiao and Fan, Hao and Ibrahim, Shadi and Wu, Song and Jin, Hai},
+  booktitle={2023 IEEE International Parallel and Distributed Processing Symposium (IPDPS)}, 
+  title={QoS-Aware and Cost-Efficient Dynamic Resource Allocation for Serverless ML Workflows}, 
+  year={2023},
+  volume={},
+  number={},
+  pages={886-896},
+  abstract={Machine Learning (ML) workflows are increasingly deployed on serverless computing platforms to benefit from their elasticity and fine-grain pricing. Proper resource allocation is crucial to achieve fast and cost-efficient execution of serverless ML workflows (specially for hyperparameter tuning and model training). Unfortunately, existing resource allocation methods are static, treat functions equally, and rely on offline prediction, which limit their efficiency. In this paper, we introduce CE-scaling – a Cost-Efficient autoscaling framework for serverless ML work-flows. During the hyperparameter tuning, CE-scaling partitions resources across stages according to their exact usage to minimize resource waste. Moreover, it incorporates an online prediction method to dynamically adjust resources during model training. We implement and evaluate CE-scaling on AWS Lambda using various ML models. Evaluation results show that compared to state-of-the-art static resource allocation methods, CE-scaling can reduce the job completion time and the monetary cost by up to 63% and 41% for hyperparameter tuning, respectively; and by up to 58% and 38% for model training.},
+  keywords={},
+  doi={10.1109/IPDPS54959.2023.00093},
+  ISSN={1530-2075},
+  month={May},}
+
+
+
+
+
+@Article{s23187829,
+AUTHOR = {Li, Ming and Zhang, Jianshan and Lin, Jingfeng and Chen, Zheyi and Zheng, Xianghan},
+TITLE = {FireFace: Leveraging Internal Function Features for Configuration of Functions on Serverless Edge Platforms},
+JOURNAL = {Sensors},
+VOLUME = {23},
+YEAR = {2023},
+NUMBER = {18},
+ARTICLE-NUMBER = {7829},
+URL = {https://www.mdpi.com/1424-8220/23/18/7829},
+PubMedID = {37765893},
+ISSN = {1424-8220},
+ABSTRACT = {The emerging serverless computing has become a captivating paradigm for deploying cloud applications, alleviating developers&rsquo; concerns about infrastructure resource management by configuring necessary parameters such as latency and memory constraints. Existing resource configuration solutions for cloud-based serverless applications can be broadly classified into modeling based on historical data or a combination of sparse measurements and interpolation/modeling. In pursuit of service response and conserving network bandwidth, platforms have progressively expanded from the traditional cloud to the edge. Compared to cloud platforms, serverless edge platforms often lead to more running overhead due to their limited resources, resulting in undesirable financial costs for developers when using the existing solutions. Meanwhile, it is extremely challenging to handle the heterogeneity of edge platforms, characterized by distinct pricing owing to their varying resource preferences. To tackle these challenges, we propose an adaptive and efficient approach called FireFace, consisting of prediction and decision modules. The prediction module extracts the internal features of all functions within the serverless application and uses this information to predict the execution time of the functions under specific configuration schemes. Based on the prediction module, the decision module analyzes the environment information and uses the Adaptive Particle Swarm Optimization algorithm and Genetic Algorithm Operator (APSO-GA) algorithm to select the most suitable configuration plan for each function, including CPU, memory, and edge platforms. In this way, it is possible to effectively minimize the financial overhead while fulfilling the Service Level Objectives (SLOs). Extensive experimental results show that our prediction model obtains optimal results under all three metrics, and the prediction error rate for real-world serverless applications is in the range of 4.25&sim;9.51%. Our approach can find the optimal resource configuration scheme for each application, which saves 7.2&sim;44.8% on average compared to other classic algorithms. Moreover, FireFace exhibits rapid adaptability, efficiently adjusting resource allocation schemes in response to dynamic environments.},
+DOI = {10.3390/s23187829}
+}
+
+
+
+
+@inproceedings{10.1145/3472456.3472501,
+author = {Jarachanthan, Jananie and Chen, Li and Xu, Fei and Li, Bo},
+title = {AMPS-Inf: Automatic Model Partitioning for Serverless Inference with Cost Efficiency},
+year = {2021},
+isbn = {9781450390682},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi-org.proxy2.library.illinois.edu/10.1145/3472456.3472501},
+doi = {10.1145/3472456.3472501},
+abstract = {The salient pay-per-use nature of serverless computing has driven its continuous penetration as an alternative computing paradigm for various workloads. Yet, challenges arise and remain open when shifting machine learning workloads to the serverless environment. Specifically, the restriction on the deployment size over serverless platforms combining with the complexity of neural network models makes it difficult to deploy large models in a single serverless function. In this paper, we aim to fully exploit the advantages of the serverless computing paradigm for machine learning workloads targeting at mitigating management and overall cost while meeting the response-time Service Level Objective (SLO). We design and implement AMPS-Inf, an autonomous framework customized for model inferencing in serverless computing. Driven by the cost-efficiency and timely-response, our proposed AMPS-Inf automatically generates the optimal execution and resource provisioning plans for inference workloads. The core of AMPS-Inf relies on the formulation and solution of a Mixed-Integer Quadratic Programming problem for model partitioning and resource provisioning with the objective of minimizing cost without violating response time SLO. We deploy AMPS-Inf on the AWS Lambda platform, evaluate with the state-of-the-art pre-trained models in Keras including ResNet50, Inception-V3 and Xception, and compare with Amazon SageMaker and three baselines. Experimental results demonstrate that AMPS-Inf achieves up to 98\% cost saving without degrading response time performance.},
+booktitle = {Proceedings of the 50th International Conference on Parallel Processing},
+articleno = {14},
+numpages = {12},
+keywords = {cost efficiency, machine learning inference, serverless computing},
+location = {Lemont, IL, USA},
+series = {ICPP '21}
+}
+
+
+
+
+@INPROCEEDINGS{9946331,
+  author={Cordingly, Robert and Xu, Sonia and Lloyd, Wes},
+  booktitle={2022 IEEE International Conference on Cloud Engineering (IC2E)}, 
+  title={Function Memory Optimization for Heterogeneous Serverless Platforms with CPU Time Accounting}, 
+  year={2022},
+  volume={},
+  number={},
+  pages={104-115},
+  abstract={Serverless Function-as-a-Service (FaaS) platforms often abstract the underlying infrastructure configuration into the single option of specifying a function's memory reservation size. This resource abstraction of coupling configurations options (e.g. vCPUs, memory, disk), combined with the lack of profiling, leaves developers to make ad hoc decisions on how to configure functions. Solutions are needed to mitigate exhaustive brute force searches of large parameter input spaces to find optimal configurations which can incur high costs. To address these challenges, we propose CPU Time Accounting Memory Selection (CPU-TAMS). CPU-TAMS is a workload agnostic memory selection method that utilizes CPU time accounting principles and regression modeling to recommend memory settings that reduce function runtime and subsequently, cost. Comparing CPU-TAMS to eight existing selection methods, we find that CPU-TAMS finds maximum value memory settings with only 8% runtime and 5% cost error compared to brute force testing while only requiring a single profiling run to evaluate function resource requirements. We adapt CPU-TAMS for use on four commercial FaaS platforms demonstrating efficacy to optimize function memory configurations where platforms feature heterogeneous infrastructure management policies.},
+  keywords={},
+  doi={10.1109/IC2E55432.2022.00019},
+  ISSN={},
+  month={Sep.},}
+
+
+
+
+@INPROCEEDINGS{8567674,
+  author={Elgamal, Tarek and Sandur, Atul and Nahrstedt, Klara and Agha, Gul},
+  booktitle={2018 IEEE/ACM Symposium on Edge Computing (SEC)}, 
+  title={Costless: Optimizing Cost of Serverless Computing through Function Fusion and Placement}, 
+  year={2018},
+  volume={},
+  number={},
+  pages={300-312},
+  abstract={Serverless computing has recently experienced significant adoption by several applications, especially Internet of Things (IoT) applications. In serverless computing, rather than deploying and managing dedicated virtual machines, users are able to deploy individual functions, and pay only for the time that their code is actually executing. However, since serverless platforms are relatively new, they have a completely different pricing model that depends on the memory, duration, and the number of executions of a sequence/workflow of functions. In this paper we present an algorithm that optimizes the price of serverless applications in AWS Lambda. We first describe the factors affecting price of serverless applications which include: (1) fusing a sequence of functions, (2) splitting functions across edge and cloud resources, and (3) allocating the memory for each function. We then present an efficient algorithm to explore different function fusion-placement solutions and find the solution that optimizes the application's price while keeping the latency under a certain threshold. Our results on image processing workflows show that the algorithm can find solutions optimizing the price by more than 35%-57% with only 5%-15% increase in latency. We also show that our algorithm can find non-trivial memory configurations that reduce both latency and price.},
+  keywords={},
+  doi={10.1109/SEC.2018.00029},
+  ISSN={},
+  month={Oct},}
+
+
+
+
+@ARTICLE{9881584,
+  author={Ko, Haneul and Pack, Sangheon},
+  journal={IEEE Internet of Things Journal}, 
+  title={Function-Aware Resource Management Framework for Serverless Edge Computing}, 
+  year={2023},
+  volume={10},
+  number={2},
+  pages={1310-1319},
+  abstract={Serverless edge computing is an emerging concept where only required functions are defined and executed as container instances at the edge cloud. The edge cloud has finite resources; therefore, sophisticated resource management is indispensable to accommodate more requests. In this article, we propose a function-aware resource management (FARM) framework for serverless edge computing that defines per-function queues to maximally utilize edge cloud resources. The FARM framework optimally determines: 1) which container instances should be maintained as warm status and 2) the amount of computing resources assigned to them. The FARM framework specifically formulates a constrained Markov decision process problem to minimize the memory resource consumption for the warm status maintenance while guaranteeing on-time task completion and converts it to a linear programming model to derive the optimal solution. The evaluation results show that the FARM framework can reduce the memory resource consumption of the edge cloud while meeting the on-time task completion.},
+  keywords={},
+  doi={10.1109/JIOT.2022.3205166},
+  ISSN={2327-4662},
+  month={Jan},}
+
+
+
+
+
+@ARTICLE{9336272,
+  author={Xu, Fei and Qin, Yiling and Chen, Li and Zhou, Zhi and Liu, Fangming},
+  journal={IEEE Transactions on Computers}, 
+  title={λDNN: Achieving Predictable Distributed DNN Training With Serverless Architectures}, 
+  year={2022},
+  volume={71},
+  number={2},
+  pages={450-463},
+  abstract={Serverless computing is becoming a promising paradigm for Distributed Deep Neural Network (DDNN) training in the cloud, as it allows users to decompose complex model training into a number of functions without managing virtual machines or servers. Though provided with a simpler resource interface (i.e., function number and memory size), inadequate function resource provisioning (either under-provisioning or over-provisioning) easily leads to unpredictable DDNN training performance in serverless platforms. Our empirical studies on AWS Lambda indicate that, such unpredictable performance of serverless DDNN training is mainly caused by the resource bottleneck of Parameter Servers (PS) and small local batch size. In this article, we design and implement $\lambda$λDNN, a cost-efficient function resource provisioning framework to provide predictable performance for serverless DDNN training workloads, while saving the budget of provisioned functions. Leveraging the PS network bandwidth and function CPU utilization, we build a lightweight analytical DDNN training performance model to enable our design of $\lambda$λDNN resource provisioning strategy, so as to guarantee DDNN training performance with serverless functions. Extensive prototype experiments on AWS Lambda and complementary trace-driven simulations demonstrate that, $\lambda$λDNN can deliver predictable DDNN training performance and save the monetary cost of function resources by up to 66.7 percent, compared with the state-of-the-art resource provisioning strategies, yet with an acceptable runtime overhead.},
+  keywords={},
+  doi={10.1109/TC.2021.3054656},
+  ISSN={1557-9956},
+  month={Feb},}
+
+
+@INPROCEEDINGS{9826021,
+  author={Assogba, Kevin and Arif, Moiz and Rafique, M. Mustafa and Nikolopoulos, Dimitrios S.},
+  booktitle={2022 22nd IEEE International Symposium on Cluster, Cloud and Internet Computing (CCGrid)}, 
+  title={On Realizing Efficient Deep Learning Using Serverless Computing}, 
+  year={2022},
+  volume={},
+  number={},
+  pages={220-229},
+  doi={10.1109/CCGrid54584.2022.00031}}
+
+
+@software{aws_lambda_power_tuning,
+  author = {alexcasalboni},
+  month = {12},
+  title = {{AWS Lambda Power Tuning}},
+  url = {https://github.com/alexcasalboni/aws-lambda-power-tuning},
+  version = {latest},
+  year = {2023}
+}
+
+
+
+@inproceedings{10.1145/3552326.3567496,
+author = {Abdi, Mania and Ginzburg, Samuel and Lin, Xiayue Charles and Faleiro, Jose and Chaudhry, Gohar Irfan and Goiri, Inigo and Bianchini, Ricardo and Berger, Daniel S and Fonseca, Rodrigo},
+title = {Palette Load Balancing: Locality Hints for Serverless Functions},
+year = {2023},
+isbn = {9781450394871},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi-org.proxy2.library.illinois.edu/10.1145/3552326.3567496},
+doi = {10.1145/3552326.3567496},
+abstract = {Function-as-a-Service (FaaS) serverless computing enables a simple programming model with almost unbounded elasticity. Unfortunately, current FaaS platforms achieve this flexibility at the cost of lower performance for data-intensive applications compared to a serverful deployment. The ability to have computation close to data is a key missing feature. We introduce Palette load balancing, which offers FaaS applications a simple mechanism to express locality to the platform, through hints we term "colors". Palette maintains the serverless nature of the service - users are still not allocating resources - while allowing the platform to place successive invocations related to each other on the same executing node. We compare a prototype of the Palette load balancer to a state-of-the-art locality-oblivious load balancer on representative examples of three applications. For a serverless web application with a local cache, Palette improves the hit ratio by 6x. For a serverless version of Dask, Palette improves run times by 46\% and 40\% on Task Bench and TPC-H, respectively. On a serverless version of NumS, Palette improves run times by 37\%. These improvements largely bridge the gap to serverful implementation of the same systems.},
+booktitle = {Proceedings of the Eighteenth European Conference on Computer Systems},
+pages = {365–380},
+numpages = {16},
+keywords = {serverless computing, data-parallel processing, cloud computing, caching},
+location = {Rome, Italy},
+series = {EuroSys '23}
+}
+
+@misc{aws_operating_lambda_performance_optimization,
+    key = {Operating Lambda Performance optimization},
+    title = {Operating Lambda: Performance optimization – Part 3},
+    note = {\url{https://aws.amazon.com/blogs/compute/operating-lambda-performance-optimization-part-3/}}
+}
+
+
+@misc{aws_new,
+    key = {New for AWS Lambda Functions with Up to 10 GB of Memory and 6 vCPUs},
+    title = {New for AWS Lambda – Functions with Up to 10 GB of Memory and 6 vCPUs},
+    note = {\url{https://aws.amazon.com/blogs/aws/new-for-aws-lambda-functions-with-up-to-10-gb-of-memory-and-6-vcpus/}}
+}
+
+@misc{vw_parameters,
+    key = {Vowpal Wabbit Command Line Argument, Update Rule Options},
+    title = {Vowpal Wabbit Command Line Argument, Update Rule Options},
+    note = {\url{https://github.com/VowpalWabbit/vowpal\_wabbit/wiki/Command\-line\-arguments\#update\-rule\-options}}
+}
+
+@inproceedings{NIPS2011_e53a0a29,
+ author = {Chapelle, Olivier and Li, Lihong},
+ booktitle = {Advances in Neural Information Processing Systems},
+ editor = {J. Shawe-Taylor and R. Zemel and P. Bartlett and F. Pereira and K.Q. Weinberger},
+ pages = {},
+ publisher = {Curran Associates, Inc.},
+ title = {An Empirical Evaluation of Thompson Sampling},
+ url = {{https://proceedings.neurips.cc/paper\_files/paper/2011/file/e53a0a2978c28872a4505bdb51db06dc-Paper.pdf}},
+ volume = {24},
+ year = {2011}
+}
+
+@misc{Lambda_function_scaling,
+    key = {Lambda function scaling},
+    title = {Lambda function scaling},
+    note = {\url{https://docs.aws.amazon.com/lambda/latest/dg/lambda-concurrency.html}}
+}

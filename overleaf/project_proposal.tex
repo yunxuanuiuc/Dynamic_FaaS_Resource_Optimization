@@ -1,0 +1,136 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+
+\title{Project Proposal: Dynamic Memory Optimization of Serverless Function using RL/ML\\
+{\footnotesize CS598 Cloud Computing Capstone Project (CCC) Fall 2023}
+\thanks{University of Illinois, Urbana-Champaign.}
+}
+
+\author{\IEEEauthorblockN{Hao Zhang}
+\IEEEauthorblockA{haoz18@illinois.edu}
+\and
+\IEEEauthorblockN{Yunxuan Li}
+\IEEEauthorblockA{yunxuan6@illinois.edu}
+\and
+\IEEEauthorblockN{Cesar Arevalo}
+\IEEEauthorblockA{cesara2@illinois.edu}
+}
+
+\maketitle
+
+\section{Project Idea}
+We plan to design and implement a framework that monitors the performance of serverless functions and automatically adjust memory configuration for various optimization obejctives including execution speed and total cloud cost.
+
+\section{Justification}
+Serverless computing has become a major paradigm of cloud computing, and the market is expected to maintain its growing trend in the upcoming future. When using FaaS (Function as a Service), users have to configure the memory size of their function \cite{aws-lambda}, \cite{10.1145/3429880.3430094}. While past researches have shown that memory size of a FaaS function impacts its function performance greatly \cite{10.1145/3464298.3493398}, it is not trivial to identify the optimal memory configuration where function SLO (service level objective) is met and the cost is at the lowest \cite{9860980}. However, searching "memory optimization for FaaS/serverless function" in ACM digital library or IEEE Xplore does not yield many relevant result, indicating potential for advancing researches in this area. 
+
+\subsection{Intellectual Merit}
+The project explores the relationship between serverless function performance and variables such as function type, load size, request rate, in order to address the memory optimization problem encountered by FaaS users. It will help us better understand the potential benefits and downfalls of using both offline datasets and online in-prod data to train ML/RL models in order to control resource allocation for serverless functions. This research is intended to expand and deepen the understanding of dynamic FaaS memory optimization, and we expect it to help FaaS users to achieve easier and automated memory configuration that satisfies their expectation on execution time or cost.
+
+\subsection{Novelty}
+There were researches conducted to predict the cost of serverless function by mapping cloud resource configuration to local configuration via benchmark tool, then test application on local to find the resource needed and calculate cost \cite{9251165}. Previous research also studied different ways of optimizing serverless function/application for cost and performance. SLAM \cite{9860980} optimizes application (consist of serverless functions in DAG) execution time by measuring response time of each function and upgrade the resources allocated to the slowest function in iteration, until the end-to-end SLO is met. COSE \cite{10063937} uses Bayesian optimization and dynamically learn and update configuration until it converges, which can be used for both function-level and application-level optimization. To our best knowledge, there are no existing researches that uses machine-learning or reinforcement learning algorithm, and take function type, load size, request rate as input, to configure resource for serverless functions automatically and dynamically in response to change in workload and traffic patterns.
+
+\subsection{Impact}
+This project will contribute to the growing body of research on serverless computing, particularly in the area of resource optimization. The solution will demonstrate how resource allocation impact serverless function performance, and more importantly, provide a painless solution to dynamic and automatic resource allocation for serverless functions. It has the potential to make serverless computing more affordable and practical, as well as increase the adoption of FaaS.
+
+\section{Preliminary plan}
+\subsection{What system do you want to implement?}
+
+Our preliminary plan is to implement a system that supports learning function performance in-the-fly, and dynamically update the memory configuration of the FaaS to align with SLO and at the same time optimize for cost. It consists of 4 major components:
+
+\subsubsection{Offline Modeler}
+Cold-start is a well-known recommendation problem. Without performance data of a new function, it is challenging to recommend an appropriate memory size. To overcome this, we plan to build or reuse an offline dataset which contains features and actual function execution times of different FaaS functions at different memory sizes. With the input dataset, the offline modeler pre-trains an ML/RL model that will be responsible of recommending memory configuration in real-time. 
+
+\subsubsection{Config Updater}
+The Config Updater will take a FaaS function and a desired memory size as input. It then updates the memory configuration of the designated FaaS function.
+\subsubsection{Log Parser}
+The log parser will take the output logs of FaaS function as input, and use regular expression and other methods to parse the logs, and extract useful data that will be used by the RL/ML model to model the function performance. These data include overall function execution time, size of the incoming request that the function receives, function type, etc.
+\subsubsection{Online Modeler}
+The online modeler will be a ML model/an RL agent that takes latest output from log parser to learn and optimize the memory size predictions. It should also take an optimization objective as input like execution time or cost, which should be consistent across the lifetime of this modeler.
+
+In an end-to-end workflow, the Offline Modeler would first train an initial model using offline data. When a lambda function is up, the Log Parser will keep parsing the output logs and send the output to the Online Modeler, which uses the initial model as a starting point, but keep updating the model with incoming data. The Online Modeler will frequently generate a recommended memory value after model update, and send it to the Config Updater, which then updates the memory configuration of the target FaaS to the recommended value.
+
+\subsection{What experiments do you think you'd need?}
+Our hypotheses and experiments are listed below: 
+\begin{itemize}
+\item With the adoption of this system, FaaS executions should comply with SLO requirements, and are able to achieve optimal/near-optimal objective.
+
+We will implement a few types of FaaS functions, apply our system, specify different SLO requirements, and send requests to the functions in order to measure how well do these functions adhere to specified SLO, as an indicator of the effectiveness of our system.
+
+
+\item The framework would quickly adapt to changing workloads and performance shifts.
+We will send requests with different sizes to the functions, and understand how our system adjusts the recommended memory in response to varying traffic volume.
+
+\item The framework should converge to optimal values quickly when workload volume is stable.
+
+Similarly, we will test both time to convergence and accuracy of our system, by sending stable workload to FaaS functions. We plan to compare the performance with a baseline method, Sizeless \cite{10.1145/3464298.3493398}, to show our method is more efficient in finding an optimal memory value.
+\end{itemize}
+
+
+
+
+\section{Preliminary literature survey}
+
+Here is our literature survey, categorized from the point of view of their target audiences:
+
+\begin{enumerate}[label=\Alph*.]
+    \item FaaS users, eg. an application developer using FaaS on their solutions
+    \item FaaS cloud provider, eg. AWS
+    \item FaaS framework, eg. OpenFaaS, Apache OpenWhisk, etc.
+    \item Microservices/Big Data Analytics Users, eg. microservices on k8s developers, spark/hadoop analytics, etc.
+\end{enumerate}
+
+A terminology used for (B) and (C) was Backend-as-a-Service (BaaS) \cite{10.1145/3464298.3493398}.
+
+\subsection{FaaS Users}
+
+These papers researched from the point of view of the FaaS user:
+\begin{itemize}
+    \item The initial paper that spawned our idea was SLAM \cite{9860980}, which researched the optimization of memory on AWS Lambda while meeting SLOs.
+    \item There was further research work on the optimization of configuration parameters like COSE \cite{10063937}, which also kept the SLO adherence but added the optimization on cost to the function placement.
+    \item Astra developed an algorithm (using graph theory, djikstra's and DAGs) to optimize for the resources utilized in analytical workloads in a serverless environment, taking into account flexibly-specified user requirements (CPU, memory, cost, etc.) \cite{9460548} .
+\end{itemize}
+
+\subsection{FaaS Frameworks Literature}
+
+These papers researched the optimization of FaaS frameworks:
+\begin{itemize}
+    \item Some researches have focused on the optimization of container scheduling and provisioning for FaaS in a container environment \cite{10.1145/3472883.3486992}, while also meeting SLOs.
+    \item Hermod researched on the optimal scheduling for serverless functions, built on top of Apache OpenWhisk, demonstrated significant performance improvements on slowdown and load \cite{10.1145/3542929.3563468}.
+    \item Cypress developed an algorithm for serverless platforms that handles container provisioning and request scheduling while being input size-sensitive \cite{10.1145/3542929.3563464} .
+\end{itemize}
+
+\subsection{FaaS Cloud Providers}
+
+These papers researched the optimization of cloud providers implementation of the FaaS backends:
+\begin{itemize}
+    \item Palette Load Balancing: Utilizing locality hints for Serverless Functions, embedding locality as a firs-level concern in a FaaS platform for optimal performace and effiency.
+\end{itemize}
+
+\subsection{Microservices/Big Data Analytics Users}
+
+These papers researched microservices implementation optimizations:
+\begin{itemize}
+    \item DeepScaling: a deep learning-based autoscaling approach that emphasizes the goal of stabilizing CPU utilization at a desired target level. Workload prediction using spatial temporal graph NN, scaling decisions using reinforcement learning \cite{10.1145/3542929.3563469} .
+    \item SHOWAR: Right-sizing (vertical/horizontal scaling) and Efficient Scheduling of Microservices \cite{10.1145/3472883.3486999} .
+    \item Cherrypick: finds the best configuration (CPU/memory/etc) for cloud analytic applications (spark) that optimizes for time/cost on AWS \cite{10.5555/3154630.3154669} .
+\end{itemize}
+
+\vspace{12pt}
+
+
+\bibliographystyle{IEEEtran}
+\bibliography{refs}
+
+\end{document}
